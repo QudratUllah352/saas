@@ -1,0 +1,29 @@
+.aff-dashboard { background: #F5FBFC; color: #334155; }
+.aff-eyebrow { color: #0E7490; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.aff-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 24px; }
+.aff-summary strong { display: block; font-size: 32px; color: #0E7490; margin: 12px 0; }
+.aff-summary small, .aff-footnote { color: #64748b; }
+.aff-notice { background: #e8f6f9; border: 1px solid #67C6D8; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.aff-notice p { margin: 8px 0 0; line-height: 1.6; }
+.aff-products { margin-bottom: 24px; }
+.aff-filters, .aff-pagination, .aff-section-heading { display: flex; gap: 16px; align-items: end; flex-wrap: wrap; margin: 20px 0; }
+.aff-filters label { flex: 1; min-width: 170px; }
+.aff-dashboard label { display: grid; gap: 8px; font-size: 14px; }
+.aff-dashboard input, .aff-dashboard select { width: 100%; min-height: 42px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; background: white; color: #334155; }
+.aff-dashboard button { background: #0E7490; color: white; border: 0; border-radius: 8px; padding: 12px 16px; cursor: pointer; }
+.aff-dashboard button:disabled { opacity: .5; cursor: default; }
+.aff-dashboard :is(a, button, select, input):focus-visible { outline: 3px solid #67C6D8; outline-offset: 3px; }
+.aff-pagination span { margin-right: auto; }
+.aff-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.aff-chart { list-style: none; padding: 0; max-height: 360px; overflow: auto; }
+.aff-chart li { margin: 18px 0; }
+.aff-chart li > div:first-child { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+.aff-track { height: 8px; background: #e8f6f9; border-radius: 8px; }
+.aff-track span { display: block; height: 100%; background: #0E7490; border-radius: 8px; }
+.aff-status { display: inline-block; border-radius: 6px; padding: 6px 8px; background: #f1f5f9; font-size: 12px; }
+.aff-status.enabled_unverified { background: #e8f6f9; color: #0E7490; }
+.aff-status.missing { background: #fff7ed; color: #9a3412; }
+.aff-section-heading { justify-content: space-between; }
+.aff-footnote { margin: 20px 0; font-size: 13px; line-height: 1.6; }
+@media (max-width: 800px) { .aff-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } .aff-charts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .aff-summary { grid-template-columns: minmax(0, 1fr); } .aff-filters label { flex-basis: 100%; } }

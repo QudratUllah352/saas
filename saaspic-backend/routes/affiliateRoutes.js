@@ -11,6 +11,9 @@ const adminAuth = require("../middleware/adminAuth");
 const { requireRole } = require("../middleware/adminAuth");
 
 const router = express.Router();
+const { getDashboardProducts, getDashboardStats } = require('../controllers/affiliateAnalyticsController');
+router.get('/admin/dashboard/products', adminAuth, requireRole('superadmin', 'admin'), getDashboardProducts);
+router.get('/admin/dashboard/stats', adminAuth, requireRole('superadmin', 'admin'), getDashboardStats);
 
 /* ==============================
    PUBLIC

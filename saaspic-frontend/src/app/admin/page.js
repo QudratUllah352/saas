@@ -468,7 +468,7 @@ export default function AdminDashboard() {
                                         </p>
                                     </Link>
                                     <Link
-                                        href="/admin/affiliate"
+                                        href="/admin/affiliates"
                                         className="admin-affiliate-link"
                                     >
                                         <span className="admin-affiliate-icon">

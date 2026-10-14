@@ -96,8 +96,8 @@ const adminLinks = [
     ),
   },
   {
-    label: "Affiliate Settings",
-    href: "/admin/affiliate",
+    label: "Affiliate Analytics",
+    href: "/admin/affiliates",
     roles: ["superadmin", "admin"],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -125,14 +125,17 @@ export default function AdminShell({ children }) {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("admin");
-      if (saved) {
-        setAdminUser(JSON.parse(saved));
+    const timer = setTimeout(() => {
+      try {
+        const saved = localStorage.getItem("admin");
+        if (saved) {
+          setAdminUser(JSON.parse(saved));
+        }
+      } catch {
+        // ignore JSON errors
       }
-    } catch {
-      // ignore JSON errors
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   function isActive(href) {

@@ -37,6 +37,9 @@ const affiliateClickSchema = new mongoose.Schema(
   }
 );
 
+affiliateClickSchema.index({ product: 1 });
+affiliateClickSchema.index({ createdAt: 1 });
+
 const AffiliateClick = mongoose.model(
   "AffiliateClick",
   affiliateClickSchema

@@ -1,6 +1,7 @@
 "use client";
 
 import { API_URL } from "@/lib/api";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -333,6 +334,7 @@ export default function AffiliateAdminPage() {
               information for SaaSpin products.
             </p>
           </div>
+          <Link className="admin-primary-button" href="/admin/affiliates">View affiliate analytics →</Link>
         </div>
 
         {/* STATS */}
