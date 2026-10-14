@@ -1,0 +1,124 @@
+/* Admin-only styling: no public selectors or global token changes. */
+.admin-shell {
+  --admin-teal: #0e7490;
+  --admin-bg: #f5fbfc;
+  --admin-border: #dce9ed;
+  color: #334155;
+  background: var(--admin-bg);
+  font-family: var(--font-geist-sans, Arial), sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.admin-shell *, .admin-shell *::before, .admin-shell *::after { box-sizing: border-box; }
+.admin-shell :is(div, section, article, form, aside, main) { min-width: 0; }
+.admin-shell :is(h1, h2, h3, p, a, span, strong, td) { overflow-wrap: anywhere; }
+.admin-shell :is(h1, h2, h3) { color: #334155 !important; letter-spacing: -0.02em !important; }
+.admin-shell h1 { font-size: clamp(24px, 3vw, 30px) !important; line-height: 1.25 !important; margin: 0 0 8px !important; }
+.admin-shell h2 { font-size: 20px !important; line-height: 1.35 !important; }
+.admin-shell h3 { font-size: 16px !important; }
+.admin-shell p { color: #475569; font-size: 14px; line-height: 1.65; }
+.admin-shell :is(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid #0e7490; outline-offset: 3px; }
+.admin-shell :is(button, input, select, textarea) { font: inherit; }
+.admin-shell :is(button, a[class*="button"], a[class*="btn"]) { min-height: 40px; }
+.admin-shell :is(button, a[class*="button"], a[class*="btn"]):disabled { cursor: not-allowed; opacity: 0.6; }
+.admin-shell :is(button, a[class*="button"], a[class*="card"]):hover { transform: none !important; }
+.admin-shell :is(.admin-shell-main, .admin-shell-content) { background: var(--admin-bg); }
+.admin-shell .admin-shell-content { width: calc(100% - 232px); margin-left: 232px; }
+.admin-shell .admin-shell-main { padding: 28px; }
+.admin-shell .admin-shell-main > :is(main, div) { padding: 0 !important; min-height: 0 !important; background: transparent !important; }
+.admin-shell :is(.admin-container, .admin-products-container, .admin-deals-container, .admin-reviews-container, .product-editor-container, .review-editor-container, .blog-editor-container, .affiliate-admin-container, .admin-dashboard-container) { max-width: 1280px; width: 100%; margin-inline: auto; }
+.admin-shell .admin-sidebar { width: 232px; background: #fff; border-right: 1px solid var(--admin-border); box-shadow: none; }
+.admin-shell .admin-sidebar-header { padding: 20px; border-bottom: 1px solid var(--admin-border); }
+.admin-shell .admin-sidebar-brand { display: flex; align-items: center; gap: 12px; }
+.admin-shell .admin-sidebar-nav { padding: 16px 12px; }
+.admin-shell .admin-sidebar-link { padding: 11px 12px; margin-bottom: 4px; border-radius: 8px; color: #334155; font-size: 14px; }
+.admin-shell .admin-sidebar-link.active { background: #e6f7fa; color: var(--admin-teal); box-shadow: none; }
+.admin-shell .admin-sidebar-link:hover { background: #f5fbfc; transform: none; }
+.admin-shell .admin-sidebar-indicator { display: none; }
+.admin-shell .admin-sidebar-icon { width: 20px; height: 20px; }
+.admin-shell .admin-sidebar-bottom { padding: 16px; }
+.admin-shell .admin-topbar { height: 64px; padding: 0 28px; border-bottom: 1px solid var(--admin-border); box-shadow: none; }
+.admin-shell .admin-topbar-left { display: flex; flex-direction: row; align-items: center; gap: 12px; }
+.admin-shell .admin-breadcrumbs { font-size: 13px; }
+.admin-shell .admin-topbar-user { display: inline-flex; align-items: center; gap: 8px; }
+.admin-shell .saaspin-logo-ring { display: none; }
+.admin-shell .saaspin-logo { background: #0e7490; box-shadow: none; border-radius: 8px; }
+.admin-shell :is(.admin-page-header, .admin-header, .admin-products-header, .admin-deals-header, .admin-reviews-header, .product-editor-header, .review-editor-header, .blog-editor-header, .affiliate-admin-header, .admin-dashboard-header) { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+.admin-shell :is(.admin-header-actions, .admin-products-header-actions, .admin-reviews-header-actions) { display: flex; gap: 8px; flex-wrap: wrap; }
+.admin-shell :is(.admin-primary-button, .admin-save-button, .admin-approve, .admin-ai-action-btn, .blog-save-button, .product-save-button, .review-save-button) {
+  background: #0e7490 !important; color: #fff !important; border: 1px solid #0e7490 !important;
+  border-radius: 8px !important; padding: 10px 16px !important; box-shadow: none !important; font-size: 14px !important; font-weight: 600 !important;
+}
+.admin-shell :is(.admin-primary-button, .admin-save-button, .admin-approve, .admin-ai-action-btn):hover:not(:disabled) { background: #095367 !important; }
+.admin-shell :is(.admin-secondary-button, .admin-edit-button, .admin-cancel-button, .admin-status-button) { background: #fff !important; color: #0e7490 !important; border: 1px solid #c7dfe5 !important; border-radius: 8px !important; padding: 8px 12px !important; font-size: 13px !important; box-shadow: none !important; flex: none !important; }
+.admin-shell :is(.admin-delete-button, .admin-danger-button, .admin-reject, .blog-remove-section) { color: #b91c1c !important; background: #fff !important; border: 1px solid #fecaca !important; border-radius: 8px !important; padding: 8px 12px !important; font-size: 13px !important; box-shadow: none !important; }
+.admin-shell :is(.admin-stat-card, .admin-management-card, .admin-edit-card, .admin-form-section, .product-editor-section, .review-editor-section, .blog-editor-card, .blog-settings-card, .affiliate-stat-card, .affiliate-product-panel, .affiliate-form-panel, .affiliate-analytics-card, .admin-submission-card, .publish-form) { background: #fff !important; color: #334155 !important; border: 1px solid var(--admin-border) !important; border-radius: 12px !important; padding: 24px !important; box-shadow: none !important; }
+.admin-shell :is(.admin-stat-card, .admin-management-card)::before, .admin-shell :is(.admin-stat-card, .admin-management-card)::after { display: none; }
+.admin-shell .admin-stat-card strong { color: #0e7490 !important; font-size: 30px !important; }
+.admin-shell :is(.admin-management-grid, .admin-stats-grid, .admin-stat-grid, .affiliate-stat-grid) { gap: 16px; }
+.admin-shell :is(.admin-review-form, .product-editor-form, .review-editor-form) { display: grid; gap: 20px; }
+.admin-shell :is(.admin-form-section, .product-editor-section, .review-editor-section) { margin: 0 !important; }
+.admin-shell :is(.product-form-grid, .review-rating-grid, .admin-edit-two-columns, .publish-grid, .affiliate-form-row, .comparison-product-selectors) { gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.admin-shell :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) { width: 100%; max-width: 100%; min-width: 0; min-height: 44px; font-size: 15px; padding: 10px 12px; color: #334155; background: #fff; border: 1px solid #cbdde3; border-radius: 8px; box-shadow: none; }
+.admin-shell textarea { line-height: 1.6; resize: vertical; }
+.admin-shell :is(input[type="checkbox"], input[type="radio"]) { accent-color: #0e7490; }
+.admin-shell label { font-size: 14px; font-weight: 600; color: #334155; }
+.admin-shell :is(.admin-form-actions, .admin-edit-actions, .product-editor-actions, .review-editor-actions, .affiliate-form-actions) { display: flex; gap: 12px; flex-wrap: wrap; padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--admin-border); }
+.admin-shell .admin-ai-assistant-card { padding: 0 !important; background: #fff !important; border: 1px solid #c7dfe5 !important; border-radius: 12px !important; box-shadow: none !important; }
+.admin-shell .admin-ai-assistant-header { background: #f5fbfc !important; padding: 14px 20px !important; border-bottom: 1px solid var(--admin-border); }
+.admin-shell .admin-ai-assistant-body { padding: 20px !important; gap: 16px; flex-wrap: wrap; }
+.admin-shell .admin-ai-badge { color: #0e7490 !important; background: none !important; }
+.admin-shell .admin-ai-sparkle { display: none; }
+.admin-shell :is(.admin-ai-assistant-card, .admin-ai-action-btn)::before, .admin-shell :is(.admin-ai-assistant-card, .admin-ai-action-btn)::after { display: none; }
+.admin-shell :is(.admin-error, .admin-error-message, .admin-products-error, .form-error) { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px; }
+.admin-shell :is(.admin-success, .admin-success-message, .admin-ai-message, .admin-message) { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px; }
+.admin-shell :is(.admin-empty, .admin-empty-state, .admin-products-empty, .admin-reviews-empty) { background: #fff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 32px; }
+.admin-shell .admin-record-status { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; white-space: nowrap; background: #f1f5f9; color: #475569; }
+.admin-shell :is(.published, .approved, .active, .admin-status-active, .admin-status-published):is(.admin-record-status, .admin-status, .admin-review-status, span) { background: #ecfdf5 !important; color: #047857 !important; }
+.admin-shell :is(.draft, .pending, .admin-status-draft):is(.admin-record-status, .admin-status, .admin-review-status, span) { background: #fffbeb !important; color: #92400e !important; }
+.admin-shell .rejected { background: #fef2f2 !important; color: #b91c1c !important; }
+.admin-shell .admin-table-scroll { overflow-x: auto; max-width: 100%; background: #fff; border: 1px solid var(--admin-border); border-radius: 12px; }
+.admin-shell .admin-record-table { border-collapse: collapse; width: 100%; text-align: left; font-size: 14px; }
+.admin-shell .admin-table-caption { text-align: left; padding: 14px 16px; color: #475569; font-size: 13px; border-bottom: 1px solid var(--admin-border); }
+.admin-shell .admin-record-table :is(th, td) { padding: 14px 16px; vertical-align: top; border-bottom: 1px solid var(--admin-border); }
+.admin-shell .admin-record-table th { background: #f5fbfc; color: #334155; font-weight: 600; white-space: nowrap; }
+.admin-shell .admin-record-table tbody tr:last-child td { border-bottom: none; }
+.admin-shell .admin-record-table tbody tr:hover { background: #fafdfe; }
+.admin-shell .admin-record-table td { min-width: 120px; max-width: 380px; }
+.admin-shell .admin-table-actions, .admin-shell .admin-table-actions > div { display: flex !important; gap: 8px !important; flex-wrap: wrap !important; padding: 0 !important; margin: 0 !important; border: none !important; }
+.admin-shell .admin-table-actions { min-width: 170px; }
+.admin-shell .admin-table-description { font-size: 13px; margin: 6px 0; color: #64748b; }
+.admin-shell .admin-table-scroll img { width: 32px; height: 32px; object-fit: contain; }
+.admin-shell .admin-submissions { gap: 16px; }
+.admin-shell .admin-record-table .publish-form { margin-top: 16px; padding: 16px !important; }
+.admin-shell .admin-record-table .publish-grid { grid-template-columns: minmax(0, 1fr); }
+.admin-shell .admin-submission-info { margin-bottom: 12px; }
+.admin-shell .admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.admin-shell .affiliate-admin-layout { grid-template-columns: minmax(220px, 300px) minmax(0, 1fr) !important; gap: 20px !important; }
+.admin-shell :is(.blog-editor-layout, .affiliate-analytics-grid) { gap: 20px; }
+.admin-shell :is(.blog-settings-card, .affiliate-product-panel) { position: static !important; }
+.admin-shell :is(.admin-management-card, .admin-stat-card, .admin-sidebar-link, .admin-ai-action-btn) { animation: none !important; transition: none !important; }
+.admin-shell :is(.comparison-detail-hero, .comparison-content-section, .comparison-quick-verdict) { background: #fff; color: #334155; border: 1px solid var(--admin-border); border-radius: 12px; padding: 24px; box-shadow: none; }
+.admin-auth-loading { background: #f5fbfc; color: #334155; font-family: var(--font-geist-sans, Arial), sans-serif; }
+@media (max-width: 1024px) {
+  .admin-shell .admin-shell-content { margin-left: 0; width: 100%; }
+  .admin-shell .admin-sidebar { transform: translateX(-100%); z-index: 1001; visibility: hidden; }
+  .admin-shell .admin-sidebar.open { transform: translateX(0); visibility: visible; }
+  .admin-shell .admin-mobile-toggle, .admin-shell .admin-sidebar-close { display: inline-flex; align-items: center; justify-content: center; }
+  .admin-shell .admin-mobile-backdrop { z-index: 1000; }
+  .admin-shell :is(.blog-editor-layout, .affiliate-admin-layout) { grid-template-columns: minmax(0, 1fr) !important; }
+}
+@media (max-width: 767px) {
+  .admin-shell .admin-shell-main { padding: 20px 16px; }
+  .admin-shell .admin-topbar { padding-inline: 16px; }
+  .admin-shell .admin-topbar-link span { display: none; }
+  .admin-shell :is(.admin-management-grid, .admin-stats-grid, .admin-stat-grid, .affiliate-stat-grid, .affiliate-analytics-grid, .product-form-grid, .review-rating-grid, .admin-edit-two-columns, .publish-grid, .affiliate-form-row, .comparison-product-selectors) { grid-template-columns: minmax(0, 1fr) !important; }
+  .admin-shell :is(.admin-stat-card, .admin-management-card, .admin-edit-card, .admin-form-section, .product-editor-section, .review-editor-section, .blog-editor-card, .blog-settings-card, .affiliate-product-panel, .affiliate-form-panel, .affiliate-analytics-card, .admin-submission-card) { padding: 20px !important; }
+  .admin-shell .admin-record-table :is(thead, caption) { display: none; }
+  .admin-shell .admin-record-table, .admin-shell .admin-record-table tbody, .admin-shell .admin-record-table tr, .admin-shell .admin-record-table td { display: block; width: 100%; max-width: none; min-width: 0; }
+  .admin-shell .admin-record-table tr { padding: 16px; border-bottom: 1px solid var(--admin-border); }
+  .admin-shell .admin-record-table td { padding: 6px 0; border: none; }
+  .admin-shell .admin-record-table td::before { content: attr(data-label); display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px; }
+  .admin-shell .admin-ai-assistant-body { display: flex !important; flex-direction: column; align-items: stretch; }
+  .admin-shell .admin-ai-action-btn { width: 100%; }
+}

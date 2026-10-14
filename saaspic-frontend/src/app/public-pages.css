@@ -1,0 +1,432 @@
+/* Homepage design language, scoped to public content only. */
+.public-page {
+  --public-ink: #334155;
+  --public-teal: #0e7490;
+  --public-accent: #67c6d8;
+  --public-bg: #f5fbfc;
+  --public-border: #e0f2f5;
+  --public-shadow: 0 6px 24px rgb(14 116 144 / 5%);
+  background: var(--public-bg);
+  color: var(--public-ink);
+  font-family: var(--sp-font);
+  line-height: 1.65;
+  min-width: 0;
+}
+
+.public-page *, .public-page *::before, .public-page *::after { box-sizing: border-box; }
+.public-page :is(article, aside, section, form, div) { min-width: 0; }
+.public-page :is(h1, h2, h3, p, a, li, strong, span) { overflow-wrap: anywhere; }
+.public-page :is(h1, h2, h3) { color: var(--sp-heading); text-wrap: balance; }
+.public-page h1 { font-size: clamp(30px, 4.4vw, 56px); line-height: 1.12; letter-spacing: -0.035em; font-weight: 800; }
+.public-page h2 { font-size: clamp(24px, 2.5vw, 34px); line-height: 1.25; letter-spacing: -0.025em; }
+.public-page h3 { line-height: 1.35; }
+.public-page p { color: var(--public-ink); }
+.public-page img { max-width: 100%; }
+.public-page :is(button, input, select, textarea) { font: inherit; }
+.public-page :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--public-teal);
+  outline-offset: 4px;
+}
+.public-page :is(button, a[class*="button"]) { min-height: 44px; }
+.public-page :is(input, select, textarea) { min-width: 0; max-width: 100%; }
+
+/* Listing heroes match the homepage's ice-blue surface and restrained glow. */
+.public-page :is(.deals-premium-hero, .reviews-hero, .comparisons-hero, .public-blogs-hero, .global-search-hero, .submit-hero) {
+  background: radial-gradient(ellipse at 50% 0%, #e6f7fa 0%, #f5fbfc 70%);
+  padding: clamp(48px, 6vw, 80px) 20px;
+  border-bottom: 1px solid var(--public-border);
+  text-align: center;
+}
+.public-page :is(.deals-premium-hero, .reviews-hero, .comparisons-hero, .public-blogs-hero, .global-search-hero, .submit-hero) h1 {
+  font-size: clamp(30px, 4.4vw, 56px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  max-width: 900px;
+  margin: 16px auto 20px;
+  color: var(--sp-heading);
+}
+.public-page :is(.reviews-hero, .comparisons-hero-content, .public-blogs-hero, .submit-hero .submit-container, .deals-hero-inner, .global-search-container) > p {
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.7;
+  max-width: 680px;
+  margin-inline: auto;
+  color: #475569;
+}
+.public-page :is(.reviews-label, .comparisons-label, .public-blogs-eyebrow, .global-search-eyebrow, .submit-eyebrow, .review-section-label, .comparison-detail-label, .blog-article-section-label, .deal-section-label) {
+  color: var(--public-teal);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.public-page :is(.deals-container, .reviews-container, .comparisons-container, .comparisons-hero-content, .public-blogs-content, .public-blogs-why-inner, .global-search-container, .submit-container, .deal-detail-container, .review-detail-container, .comparison-detail-container, .blog-detail-container, .blog-detail-layout, .deals-info-container) {
+  width: min(1180px, 100%);
+  max-width: 1180px;
+  margin-inline: auto;
+}
+.public-page :is(.deals-premium-section, .reviews-section, .comparisons-section, .comparisons-why, .public-blogs-why, .global-search-results, .submit-form-section) {
+  padding: clamp(40px, 5vw, 64px) 20px;
+}
+.public-page .public-blogs-content { padding: clamp(40px, 5vw, 64px) 20px; }
+
+/* Deals: category controls, toolbar, and the existing homepage cards. */
+.public-page .deals-category-filter {
+  padding: 24px;
+  border: 1px solid var(--public-border);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--public-shadow);
+}
+.public-page .deals-category-heading p { font-size: 14px; }
+.public-page .deals-category-buttons { gap: 8px; flex-wrap: wrap; }
+.public-page .deals-category-buttons button {
+  min-height: 44px;
+  font-size: 13px;
+  padding: 10px 16px;
+  color: var(--public-teal);
+  background: var(--public-bg);
+  border-color: var(--public-border);
+  white-space: normal;
+}
+.public-page .deals-category-buttons button:is(.active, :hover) {
+  background: var(--public-teal);
+  color: #fff;
+  border-color: var(--public-teal);
+}
+.public-page :is(.deals-section-heading, .deals-premium-toolbar) { gap: 20px; flex-wrap: wrap; }
+.public-page .deals-premium-toolbar h3 { font-size: 20px; }
+.public-page .deals-sort-buttons { flex-wrap: wrap; }
+.public-page .deals-sort-buttons a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+.public-page .deals-sort-buttons a.active { background: var(--public-teal); color: #fff; }
+.public-page :is(.deals-hero-search, .global-search-form) {
+  max-width: 680px;
+  margin-inline: auto;
+  border: 1px solid var(--public-border);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--public-shadow);
+}
+.public-page :is(.deals-hero-search, .global-search-form) input { font-size: 16px; flex: 1; }
+.public-page :is(.deals-hero-search, .global-search-form) button { background: var(--public-teal); color: #fff; border-radius: 10px; min-height: 44px; }
+.public-page :is(.deals-grid, .reviews-grid, .comparisons-grid, .public-blog-grid, .global-search-grid, .related-deals-grid, .review-related-grid, .comparison-related-grid, .blog-related-content-grid) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.public-page :is(.premium-deal-card, .premium-review-card, .premium-comparison-card, .premium-blog-card, .public-blog-card, .global-search-card, .related-deal-card, .review-related-card, .comparison-related-card, .blog-related-content-card) {
+  border: 1px solid var(--public-border);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--public-shadow);
+}
+.public-page :is(.premium-deal-card, .premium-review-card, .premium-comparison-card) h2 { font-size: 21px; }
+.public-page :is(.premium-deal-card, .premium-review-card, .premium-comparison-card, .global-search-card) h3 { font-size: 18px; }
+.public-page :is(.premium-deal-card, .premium-review-card, .premium-comparison-card, .global-search-card):hover {
+  border-color: #bce7ee;
+  box-shadow: 0 12px 32px rgb(14 116 144 / 9%);
+}
+.public-page :is(.premium-deal-button, .premium-review-button, .premium-comparison-button, .comparisons-primary-button, .public-blogs-primary-button, .review-deal-button, .comparison-product-link, .affiliate-cta-button, .submit-form-button) {
+  background: var(--public-teal);
+  color: #fff;
+  border-radius: 12px;
+  border-color: var(--public-teal);
+  min-height: 46px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.public-page :is(.premium-deal-button, .premium-review-button, .premium-comparison-button, .comparisons-primary-button, .public-blogs-primary-button, .review-deal-button, .comparison-product-link, .affiliate-cta-button):hover { background: #095367; color: #fff; }
+.public-page :is(.reviews-empty, .comparisons-empty, .deals-premium-empty, .global-search-empty, .blog-error-page) {
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: 20px;
+  border: 1px solid var(--public-border);
+  background: #fff;
+}
+
+/* Details retain editorial structure, ratings, tables, and affiliate actions. */
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page, .blog-detail-page) { padding-inline: 20px; }
+.public-page :is(.review-detail-hero, .comparison-detail-hero, .blog-detail-hero) {
+  background: transparent;
+  padding: clamp(40px, 5vw, 64px) 0;
+  color: var(--public-ink);
+}
+.public-page :is(.review-detail-hero, .comparison-detail-hero, .blog-detail-hero) h1 {
+  font-size: clamp(30px, 4.4vw, 52px);
+  color: var(--sp-heading);
+  line-height: 1.15;
+}
+.public-page :is(.deal-detail-card, .comparison-detail-product, .comparison-quick-verdict, .comparison-verdict-card, .comparison-deep-dive-card, .comparison-affiliate-card, .quick-verdict-box, .review-rating-summary, .review-pricing-card, .review-final-verdict, .blog-article, .blog-related-card, .blog-related-software, .deal-guide-sidebar) {
+  border: 1px solid var(--public-border);
+  border-radius: 20px;
+  box-shadow: var(--public-shadow);
+  background: #fff;
+  color: var(--public-ink);
+  padding: clamp(20px, 3vw, 32px);
+}
+.public-page :is(.deal-detail-offer, .review-deal-box, .review-affiliate-section, .comparison-on-page, .review-on-page, .blog-on-page) {
+  background: #e6f7fa;
+  border: 1px solid var(--public-border);
+  border-radius: 16px;
+  color: var(--public-ink);
+}
+.public-page :is(.deal-content, .review-content-section, .comparison-content-section, .blog-article-section) { scroll-margin-top: 96px; }
+.public-page :is(.review-content-section, .comparison-content-section, .blog-article-section) p { font-size: 16px; line-height: 1.8; }
+.public-page :is(.comparison-on-page-links, .review-on-page-links, .blog-on-page-links, .review-detail-meta, .comparison-detail-meta, .blog-detail-meta, .blog-detail-tags) { flex-wrap: wrap; gap: 12px; }
+.public-page :is(.comparison-on-page-links, .review-on-page-links, .blog-on-page-links) a { color: var(--public-teal); }
+.public-page .comparison-table-wrapper { max-width: 100%; overflow-x: auto; border: 1px solid var(--public-border); border-radius: 16px; }
+.public-page .comparison-table { margin: 0; }
+.public-page .comparison-table th { background: #e6f7fa; color: var(--public-teal); }
+.public-page .comparison-table :is(th, td) { line-height: 1.6; }
+.public-page .blog-detail-cover { width: 100%; border-radius: 20px; }
+.public-page .blog-detail-layout { grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); gap: 32px; }
+.public-page .blog-article :is(img, video, iframe) { max-width: 100%; }
+.public-page .blog-article pre { overflow-x: auto; max-width: 100%; }
+.public-page .public-back-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--public-border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--public-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Search and submissions share homepage surfaces and input treatments. */
+.public-page .global-search-card { padding: 24px; }
+.public-page .global-search-card-content { flex: 1; }
+.public-page .global-search-card-top { flex-wrap: wrap; gap: 8px; }
+.public-page .global-search-card-logo { flex-shrink: 0; }
+.public-page .global-search-summary { gap: 16px; flex-wrap: wrap; }
+.public-page .submit-form-card {
+  padding: clamp(20px, 3vw, 36px) !important;
+  border-color: var(--public-border) !important;
+  box-shadow: var(--public-shadow) !important;
+}
+.public-page .submit-field :is(input, select, textarea) {
+  width: 100%;
+  border: 1px solid #c7e4ea;
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px 14px;
+  color: var(--public-ink);
+  font-size: 16px;
+  min-height: 48px;
+}
+.public-page .submit-field label { color: var(--public-ink); font-size: 14px; font-weight: 600; }
+.public-page .submit-form-button:disabled { cursor: wait; opacity: 0.65; }
+.public-page .submit-benefit { line-height: 1.6; }
+.public-page :is(.comparisons-why-card, .public-blogs-why-card) { border: 1px solid var(--public-border); border-radius: 20px; background: #fff; padding: 24px; }
+.public-page.affiliate-disclosure-page { padding: clamp(40px, 5vw, 72px) 20px; }
+.public-page .affiliate-disclosure-container { max-width: 900px; margin-inline: auto; }
+.public-page .affiliate-disclosure-content { padding: clamp(20px, 3vw, 36px); background: #fff; border: 1px solid var(--public-border); border-radius: 20px; box-shadow: var(--public-shadow); }
+
+@media (max-width: 1024px) {
+  .public-page :is(.deals-grid, .reviews-grid, .comparisons-grid, .public-blog-grid, .global-search-grid, .related-deals-grid, .review-related-grid, .comparison-related-grid, .blog-related-content-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .public-page .blog-detail-layout { grid-template-columns: minmax(0, 1fr); }
+  .public-page .blog-detail-sidebar { position: static; }
+  .public-page .submit-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+@media (max-width: 767px) {
+  .public-page :is(.deals-grid, .reviews-grid, .comparisons-grid, .public-blog-grid, .global-search-grid, .related-deals-grid, .review-related-grid, .comparison-related-grid, .blog-related-content-grid, .comparisons-why-grid, .public-blogs-why-grid, .comparison-deep-dive-grid, .comparison-verdict-grid, .comparison-affiliate-grid, .review-pros-cons, .review-pricing-grid, .review-alternatives, .rating-breakdown-grid, .submit-two-columns) { grid-template-columns: minmax(0, 1fr); }
+  .public-page .product-pros-cons-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .public-page :is(.review-detail-heading, .review-rating-layout, .deal-guide-content) { grid-template-columns: minmax(0, 1fr); }
+  .public-page .comparison-detail-products { grid-template-columns: minmax(0, 1fr); }
+  .public-page :is(.deal-detail-header, .deal-detail-offer, .deal-review-link, .deal-expert-review, .review-deal-box, .deals-section-heading, .deals-premium-toolbar) { flex-direction: column; align-items: stretch; gap: 20px; }
+  .public-page :is(.deals-hero-search, .global-search-form) { height: auto; display: flex; flex-wrap: wrap; padding: 10px; gap: 8px; }
+  .public-page :is(.deals-hero-search, .global-search-form) input { flex-basis: 100%; width: 100%; }
+  .public-page :is(.deals-hero-search, .global-search-form) button { width: 100%; }
+  .public-page .deals-search-icon { display: none; }
+  .public-page .deals-category-filter { padding: 20px; }
+  .public-page .review-main-score { width: fit-content; }
+}
+@media (max-width: 430px) {
+  .public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page, .blog-detail-page) { padding-inline: 16px; }
+  .public-page :is(.deals-premium-hero, .reviews-hero, .comparisons-hero, .public-blogs-hero, .global-search-hero, .submit-hero, .deals-premium-section, .reviews-section, .comparisons-section, .comparisons-why, .public-blogs-why, .global-search-results, .submit-form-section) { padding-inline: 16px; }
+  .public-page .public-blogs-content { padding-inline: 16px; }
+  .public-page .deals-category-filter { padding: 16px; }
+  .public-page .deals-category-buttons button { padding-inline: 12px; }
+  .public-page .deals-sort-buttons { width: 100%; gap: 8px; }
+  .public-page .deals-sort-buttons a { flex: 1; padding-inline: 10px; }
+  .public-page .global-search-card { padding: 18px; gap: 12px; }
+  .public-page .global-search-card-logo { width: 40px; height: 40px; }
+  .public-page :is(.deal-information, .deal-feature-list, .deal-integration-list) { grid-template-columns: minmax(0, 1fr); }
+  .public-page .premium-comparison-products { gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-page *, .public-page *::before, .public-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Catalog layout corrections. These roots deliberately exclude home and admin. */
+.public-page:is(.deals-page, .reviews-page, .comparisons-page, .deal-detail-page, .review-detail-page, .comparison-detail-page, .deals-info-section) {
+  --catalog-gutter: clamp(16px, 3vw, 32px);
+  --catalog-space: clamp(32px, 4vw, 56px);
+  --catalog-padding: clamp(20px, 2.5vw, 32px);
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-premium-hero, .reviews-hero, .comparisons-hero) {
+  padding: var(--catalog-space) var(--catalog-gutter);
+  background: #f5fbfc;
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-premium-section, .reviews-section, .comparisons-section, .comparisons-why, .deals-submit-section) {
+  padding: var(--catalog-space) var(--catalog-gutter);
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page, .deal-detail-page, .review-detail-page, .comparison-detail-page, .deals-info-section) :is(.deals-container, .reviews-container, .comparisons-container, .deals-premium-hero-inner, .comparisons-hero-content, .deal-detail-container, .review-detail-container, .comparison-detail-container, .deals-info-container, .deals-submit-card) {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-premium-hero-inner, .reviews-hero .reviews-container, .comparisons-hero-content) > p {
+  max-width: 65ch;
+  margin: 0 auto 24px;
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.7;
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-section-heading, .reviews-heading, .comparisons-heading) { margin: 0 0 28px; gap: 20px; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-section-heading, .reviews-heading, .comparisons-heading) h2 { margin: 8px 0 12px; font-size: clamp(24px, 3vw, 32px); }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-section-heading, .reviews-heading, .comparisons-heading) p { margin: 0; font-size: 16px; max-width: 70ch; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-grid, .reviews-grid, .comparisons-grid) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-card, .premium-review-card, .premium-comparison-card) {
+  min-height: 0;
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  transform: none;
+  transition: border-color 0.15s ease;
+}
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-card, .premium-review-card, .premium-comparison-card)::before { display: none; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-top, .premium-review-card-top, .premium-comparison-top, .premium-deal-price, .premium-price-row, .premium-comparison-meta) { flex-wrap: wrap; gap: 8px 12px; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-logo, .premium-review-logo, .premium-comparison-logo, .premium-comparison-vs) { flex-shrink: 0; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-logo, .premium-review-logo, .premium-comparison-logo) img { object-fit: contain; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-product-info p, .premium-review-content p, .premium-review-pros > div) { font-size: 14px; line-height: 1.65; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-category, .premium-review-category, .premium-deal-discount, .premium-comparison-time) { white-space: normal; }
+.public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-button, .premium-review-button, .premium-comparison-button) { text-align: center; white-space: normal; flex-shrink: 0; }
+.public-page.comparisons-page .premium-comparison-products { display: grid; grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr); align-items: start; gap: 12px; }
+.public-page.comparisons-page .premium-comparison-vs { align-self: center; }
+.public-page.comparisons-page .premium-comparison-product h3 { font-size: 16px; max-width: 100%; white-space: normal; overflow: visible; text-overflow: clip; }
+.public-page.comparisons-page .premium-comparison-product > span { max-width: 100%; white-space: normal; }
+.public-page.comparisons-page .premium-comparison-highlights { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px 16px; margin-top: auto; }
+.public-page.comparisons-page .comparisons-why-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+
+/* Search, category controls and submission CTA keep their existing behavior. */
+.public-page.deals-page .deals-premium-glow,
+.public-page.deals-page .deals-submit-decoration { display: none; }
+.public-page.deals-page .deals-hero-search { display: flex; gap: 12px; height: auto; padding: 8px; }
+.public-page.deals-page .deals-hero-search input[type="search"] { flex: 1 1 0; width: 0; padding: 12px 8px; }
+.public-page.deals-page .deals-hero-search button { flex-shrink: 0; padding: 12px 24px; }
+.public-page.deals-page .deals-hero-stats { gap: 16px; flex-wrap: wrap; margin-top: 28px; }
+.public-page.deals-page .deals-category-filter { margin-bottom: 24px; border-radius: 16px; }
+.public-page.deals-page .deals-category-heading { margin-bottom: 16px; }
+.public-page.deals-page .deals-category-heading p { margin-top: 6px; }
+.public-page.deals-page .deals-premium-toolbar { margin: 0 0 24px; padding: 20px; }
+.public-page.deals-page .deals-premium-toolbar h3 { margin: 6px 0; }
+.public-page.deals-page .deals-sort-buttons { gap: 8px; }
+.public-page.deals-page .deals-sort-buttons a { font-size: 14px; white-space: normal; text-align: center; }
+.public-page.deals-page .deals-submit-section { padding-top: 0; }
+.public-page.deals-page .deals-submit-card { padding: var(--catalog-space) var(--catalog-padding); background: #e6f7fa; border: 1px solid #c7e8ee; border-radius: 16px; }
+.public-page.deals-page .deals-submit-content { max-width: 65ch; margin-inline: auto; }
+.public-page.deals-page .deals-submit-content > span { color: #0e7490; font-size: 12px; }
+.public-page.deals-page .deals-submit-content h2 { color: #334155; margin: 12px 0; font-size: clamp(24px, 3vw, 32px); }
+.public-page.deals-page .deals-submit-content p { color: #334155; font-size: 16px; margin-bottom: 24px; }
+.public-page.deals-page .deals-submit-content > a { background: #0e7490; font-size: 15px; min-height: 44px; }
+.public-page.deals-info-section { padding: var(--catalog-space) var(--catalog-gutter); }
+.public-page.deals-info-section .deals-info-container { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+
+/* Detail sections share gutters and spacing; prose stays at a readable length. */
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) { padding: 32px var(--catalog-gutter) var(--catalog-space); }
+.public-page:is(.review-detail-page, .comparison-detail-page) :is(.review-detail-hero, .comparison-detail-hero) { padding: 0 0 32px; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.deal-detail-intro, .review-detail-hero, .comparison-detail-hero) h1 { font-size: clamp(28px, 3.6vw, 46px); line-height: 1.15; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.review-intro, .comparison-detail-excerpt) { font-size: 18px; line-height: 1.7; max-width: 70ch; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.review-content-section, .comparison-content-section) > p,
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.quick-verdict-box, .review-final-verdict, .comparison-quick-verdict, .comparison-conclusion, .deal-guide-main) > p { max-width: 75ch; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.review-content-section, .comparison-content-section) > h2 { font-size: clamp(24px, 2.5vw, 32px); margin: 8px 0 20px; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.review-author-meta, .review-deal-price, .deal-detail-pricing, .deal-price, .product-offer-pricing, .product-offer-top, .deal-expert-meta, .review-expert-heading, .review-share, .review-share-buttons, .comparison-share, .comparison-share-buttons) { flex-wrap: wrap; gap: 12px; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.affiliate-cta-button, .comparison-product-link, .deal-expert-button, .deal-review-link-button, .review-deal-button) { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 12px 18px; max-width: 100%; white-space: normal; text-align: center; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) .affiliate-cta-arrow { flex-shrink: 0; }
+.public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) :is(.affiliate-cta-disclosure, .review-affiliate-content p, .comparison-affiliate-header p, .comparison-affiliate-card p) { font-size: 14px; line-height: 1.7; }
+.public-page:is(.review-detail-page, .comparison-detail-page) :is(.review-on-page-links, .comparison-on-page-links) a { display: inline-flex; align-items: center; min-height: 44px; white-space: normal; }
+
+/* Deals: offer, analysis and guide panels. */
+.public-page.deal-detail-page :is(.product-offers-section, .product-pros-cons-section, .deal-guide-section, .deal-detail-faq, .related-deals-section, .deal-expert-review) { padding: var(--catalog-padding); margin-top: 32px; border-radius: 16px; }
+.public-page.deal-detail-page .deal-detail-offer { padding: var(--catalog-padding); background: #e6f7fa !important; }
+.public-page.deal-detail-page .deal-expert-review { background: #fff; border: 1px solid #e0f2f5; grid-template-columns: 160px minmax(0, 1fr); gap: 24px; }
+.public-page.deal-detail-page .deal-expert-score { background: #e6f7fa; min-height: 160px; }
+.public-page.deal-detail-page .deal-expert-content :is(h2, p) { color: #334155; }
+.public-page.deal-detail-page .deal-expert-content .deal-section-label { color: #0e7490; }
+.public-page.deal-detail-page .deal-guide-content { grid-template-columns: minmax(0, 1fr) minmax(240px, 300px); gap: 24px; }
+.public-page.deal-detail-page .product-offer-brand { gap: 12px; }
+.public-page.deal-detail-page .product-offer-logo { flex-shrink: 0; }
+.public-page.deal-detail-page .deal-section-heading h2 { font-size: clamp(24px, 2.5vw, 32px); }
+.public-page.deal-detail-page .deal-detail-actions .affiliate-cta-wrapper { max-width: 560px; }
+
+/* Reviews: rating, features, pros/cons, pricing and verdict. */
+.public-page.review-detail-page .review-detail-heading { grid-template-columns: minmax(0, 1fr) 160px; gap: 32px; align-items: start; }
+.public-page.review-detail-page .review-main-score { min-width: 0; width: 160px; padding: 20px; background: #fff; }
+.public-page.review-detail-page .review-content-section { padding: 32px 0; }
+.public-page.review-detail-page :is(.quick-verdict-box, .review-final-verdict, .review-deal-box, .review-rating-summary) { margin: 32px 0; padding: var(--catalog-padding); }
+.public-page.review-detail-page .review-rating-layout { grid-template-columns: 160px minmax(0, 1fr); gap: 24px; }
+.public-page.review-detail-page .rating-breakdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.public-page.review-detail-page .rating-breakdown-top { gap: 12px; flex-wrap: wrap; }
+.public-page.review-detail-page .review-feature { grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding: 20px; background: #fff; }
+.public-page.review-detail-page :is(.review-pros, .review-cons, .alternative-card) { background: #fff; padding: var(--catalog-padding); }
+.public-page.review-detail-page :is(.review-pricing-grid, .review-alternatives) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.public-page.review-detail-page .review-pros-cons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.public-page.review-detail-page .review-deal-box { gap: 24px; }
+
+/* Comparisons: equal product columns and local table scrolling. */
+.public-page.comparison-detail-page .comparison-bottom-action { margin-top: 0; margin-bottom: 24px; }
+.public-page.comparison-detail-page .comparison-detail-products { grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr); align-items: stretch; gap: 24px; margin-top: 0; }
+.public-page.comparison-detail-page .comparison-detail-vs { align-self: center; text-align: center; }
+.public-page.comparison-detail-page .comparison-detail-product { display: flex; flex-direction: column; align-items: flex-start; }
+.public-page.comparison-detail-page .comparison-detail-product .affiliate-cta-wrapper { margin-top: auto; padding-top: 16px; }
+.public-page.comparison-detail-page .comparison-detail-product .comparison-product-link { margin-top: auto; }
+.public-page.comparison-detail-page .comparison-content-section { margin-top: 32px; }
+.public-page.comparison-detail-page :is(.comparison-deep-dive-grid, .comparison-verdict-grid, .comparison-affiliate-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.public-page.comparison-detail-page .comparison-conclusion { padding: var(--catalog-padding); background: #fff; }
+.public-page.comparison-detail-page .comparison-table-wrapper { overflow-x: auto; overscroll-behavior-x: contain; background: #fff; }
+.public-page.comparison-detail-page .comparison-table { width: 100%; min-width: 660px; table-layout: fixed; }
+.public-page.comparison-detail-page .comparison-table :is(th, td) { padding: 16px 20px; font-size: 15px; overflow-wrap: anywhere; }
+.public-page.comparison-detail-page .comparison-table tr > :first-child { width: 24%; }
+.public-page.comparison-detail-page .comparison-table tr > :not(:first-child) { width: 38%; }
+.public-page.comparison-detail-page .comparison-affiliate-section { width: 100%; max-width: 1200px; margin: 32px auto 0; padding: var(--catalog-padding); background: #e6f7fa; }
+.public-page.comparison-detail-page .comparison-affiliate-section .comparison-affiliate-header h2 { font-size: clamp(24px, 2.5vw, 32px); }
+
+@media (max-width: 1100px) {
+  .public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-grid, .reviews-grid, .comparisons-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .public-page.comparisons-page .comparisons-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .public-page.review-detail-page :is(.review-pricing-grid, .review-alternatives) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .public-page.deal-detail-page .deal-guide-content { grid-template-columns: minmax(0, 1fr); }
+  .public-page.review-detail-page .review-rating-layout { grid-template-columns: minmax(0, 1fr); }
+  .public-page.review-detail-page .review-rating-overall { min-height: 150px; }
+}
+@media (max-width: 767px) {
+  .public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.deals-grid, .reviews-grid, .comparisons-grid) { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; gap: 20px; }
+  .public-page.deals-page .deals-hero-search { flex-wrap: wrap; }
+  .public-page.deals-page .deals-hero-search input[type="search"] { flex-basis: 100%; width: 100%; }
+  .public-page.deals-page .deals-hero-search button { width: 100%; }
+  .public-page.deals-page .deals-sort-buttons { width: 100%; }
+  .public-page.deals-page .deals-sort-buttons a { flex: 1; }
+  .public-page.deals-info-section .deals-info-container { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .public-page.deal-detail-page .deal-expert-review { grid-template-columns: minmax(0, 1fr); }
+  .public-page.review-detail-page .review-detail-heading { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .public-page.review-detail-page :is(.review-pros-cons, .review-pricing-grid, .review-alternatives) { grid-template-columns: minmax(0, 1fr); }
+  .public-page.comparison-detail-page :is(.comparison-detail-products, .comparison-deep-dive-grid, .comparison-verdict-grid, .comparison-affiliate-grid) { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .public-page.comparisons-page .comparisons-why-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  /* Keep the existing header on one row on catalog pages at 320px. */
+  .navbar:has(+ main.public-page:is(.deals-page, .reviews-page, .comparisons-page, .deal-detail-page, .review-detail-page, .comparison-detail-page)) .navbar-container { flex-wrap: nowrap; gap: 8px; }
+  .navbar:has(+ main.public-page:is(.deals-page, .reviews-page, .comparisons-page, .deal-detail-page, .review-detail-page, .comparison-detail-page)) .navbar-toggle { flex-shrink: 0; margin-left: 0; }
+  .public-page:is(.deals-page, .reviews-page, .comparisons-page) :is(.premium-deal-card, .premium-review-card, .premium-comparison-card) { padding: 20px; }
+  .public-page.review-detail-page .rating-breakdown-grid { grid-template-columns: minmax(0, 1fr); }
+  .public-page.review-detail-page .review-feature { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .public-page:is(.deal-detail-page, .review-detail-page, .comparison-detail-page) .affiliate-cta-button { width: 100%; }
+}

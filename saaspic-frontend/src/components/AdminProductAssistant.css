@@ -1,0 +1,9 @@
+.admin-shell .admin-product-ai-body { padding: 20px; }
+.admin-shell .admin-product-ai-body > p { margin: 0 0 16px; }
+.admin-shell .admin-product-ai-body > button { margin-bottom: 16px; }
+.admin-shell .admin-product-ai-preview { margin-top: 20px; border-top: 1px solid #dce9ed; padding-top: 16px; }
+.admin-shell .admin-product-ai-preview dl > div { padding: 10px 0; border-bottom: 1px solid #ecf4f6; }
+.admin-shell .admin-product-ai-preview dt { font-weight: 600; color: #334155; }
+.admin-shell .admin-product-ai-preview dd { margin: 6px 0 0; white-space: pre-wrap; color: #475569; overflow-wrap: anywhere; }
+.admin-shell .admin-product-ai-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+@media (max-width: 600px) { .admin-shell .admin-product-ai-actions button { width: 100%; } }

@@ -1,0 +1,82 @@
+.control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #9298a7;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  background: rgb(103 198 216 / 12%);
+  color: #fff;
+}
+
+.toggle:focus-visible,
+.control > a:focus-visible,
+.dropdown a:focus-visible {
+  outline: 2px solid #67c6d8;
+  outline-offset: 3px;
+}
+
+.toggle svg {
+  transition: transform 0.2s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #28606b;
+  border-radius: 12px;
+  background: #0c3b47;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 22%);
+  color: #fff;
+}
+
+.dropdown nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Override existing footer link styling only inside this dropdown. */
+.dropdown nav a {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: #d6e9ed;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.dropdown nav a:hover {
+  background: rgb(103 198 216 / 12%);
+  color: #fff;
+  transform: none;
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "width": 320,
+    "scrollWidth": 320,
+    "tableDisplay": "block",
+    "sidebarVisibility": "hidden"
+  },
+  {
+    "width": 375,
+    "scrollWidth": 375,
+    "tableDisplay": "block",
+    "sidebarVisibility": "hidden"
+  },
+  {
+    "width": 430,
+    "scrollWidth": 430,
+    "tableDisplay": "block",
+    "sidebarVisibility": "hidden"
+  },
+  {
+    "width": 768,
+    "scrollWidth": 768,
+    "tableDisplay": "table",
+    "sidebarVisibility": "hidden"
+  },
+  {
+    "width": 1024,
+    "scrollWidth": 1024,
+    "tableDisplay": "table",
+    "sidebarVisibility": "hidden"
+  },
+  {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "tableDisplay": "table",
+    "sidebarVisibility": "visible"
+  }
+]

@@ -1,0 +1,353 @@
+# SaaSpin Project Guide
+
+## 1. Project Overview
+
+SaaSpin is a SaaS discovery platform.
+
+Users can:
+
+- Discover SaaS products
+- Browse SaaS deals
+- Read detailed reviews
+- Compare SaaS products
+- Read SaaS-related blog content
+- Search across the website
+- Submit SaaS deals
+
+Admins can:
+
+- Manage products
+- Manage deals
+- Review submitted deals
+- Create and manage reviews
+- Create comparisons
+- Create blog posts
+- Use AI-assisted content generation
+- Manage affiliate settings
+- View affiliate click analytics
+
+---
+
+# 2. Technology Stack
+
+## Frontend
+
+- Next.js
+- React
+- JavaScript
+- Next.js App Router
+- CSS
+- Fetch API
+
+Frontend directory:
+
+saaspic-frontend/
+
+Development URL:
+
+http://localhost:3000
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT authentication
+- bcrypt
+- Gemini API for AI-assisted content
+
+Backend directory:
+
+saaspic-backend/
+
+Development URL:
+
+http://localhost:5000
+
+API base:
+
+http://localhost:5000/api
+
+---
+
+# 3. Brand
+
+Project name:
+
+SaaSpin
+
+Primary color:
+
+#635bff
+
+Main dark color:
+
+#111827
+
+Muted text:
+
+#6b7280
+
+Light background:
+
+#f7f8fc
+
+White:
+
+#ffffff
+
+Border:
+
+#e8e9ef
+
+Success:
+
+#22c55e
+
+---
+
+# 4. Design Style
+
+SaaSpin should have a:
+
+- Modern SaaS appearance
+- Clean interface
+- Premium appearance
+- Minimal design
+- Consistent spacing
+- Rounded cards
+- Subtle shadows
+- Purple accent color
+- Responsive mobile design
+
+Avoid:
+
+- Excessive gradients
+- Too many colors
+- Very large buttons
+- Inconsistent card designs
+- Different design styles between pages
+
+---
+
+# 5. Public Navigation
+
+Main navigation:
+
+- Deals
+- Reviews
+- Comparisons
+- Blog
+- Search
+- Submit Deal
+
+Deal categories:
+
+- AI
+- Productivity
+- Marketing
+- CRM
+- Design
+- Finance
+- Analytics
+- Development
+
+Category navigation must use:
+
+/deals?category=ai
+
+NOT:
+
+/deals/ai
+
+Examples:
+
+/deals?category=marketing
+/deals?category=crm
+/deals?category=design
+
+---
+
+# 6. Main Public Pages
+
+/
+
+/deals
+
+/deals/[deal-id]
+
+/reviews
+
+/reviews/[slug]
+
+/comparisons
+
+/comparisons/[slug]
+
+/blogs
+
+/blogs/[slug]
+
+/search
+
+/submit-deal
+
+/affiliate-disclosure
+
+---
+
+# 7. Admin
+
+Admin routes use:
+
+/admin
+
+/admin/affiliate
+
+/admin/reviews
+
+/admin/comparisons
+
+/admin/blogs
+
+/admin/submissions
+
+Admin pages must NOT be linked from the public Navbar or Footer.
+
+Admin pages must use:
+
+noindex
+nofollow
+
+Admin security must rely on authentication/authorization, not on hiding the URL.
+
+---
+
+# 8. Affiliate System
+
+Affiliate URLs are private backend data.
+
+Never expose these fields through public APIs:
+
+affiliate.url
+affiliate.programName
+affiliate.network
+affiliate.commissionType
+affiliate.commissionValue
+
+Public APIs may expose only:
+
+affiliate.enabled
+affiliate.disclosureText
+
+Public affiliate CTA flow:
+
+Visitor
+→ SaaSpin content
+→ /api/affiliate/go/:productId
+→ record affiliate click
+→ redirect to affiliate destination
+
+Supported sources:
+
+deal
+review
+comparison
+blog
+homepage
+search
+other
+
+Affiliate links should use:
+
+rel="noopener noreferrer sponsored"
+
+---
+
+# 9. Content Rules
+
+Reviews, comparisons and blogs must use original content.
+
+AI-generated content should be treated as a draft.
+
+AI content must not automatically publish.
+
+Admin should review content before publication.
+
+Do not invent product claims, prices, features or affiliate relationships.
+
+---
+
+# 10. SEO
+
+Public content should be indexable.
+
+Important SEO pages:
+
+- Homepage
+- Deals
+- Deal details
+- Reviews
+- Review details
+- Comparisons
+- Comparison details
+- Blogs
+- Blog details
+
+Each important page should have:
+
+- Unique title
+- Meta description
+- Canonical URL
+- Open Graph metadata where appropriate
+- Semantic headings
+- Internal links
+- Descriptive image alt text
+
+Sitemap must contain public pages only.
+
+Admin pages must not be included in the sitemap.
+
+---
+
+# 11. Coding Rules
+
+Keep frontend and backend separate.
+
+Frontend:
+saaspic-frontend/
+
+Backend:
+saaspic-backend/
+
+Do not hardcode production URLs when an environment variable can be used.
+
+Frontend API environment variable:
+
+NEXT_PUBLIC_API_URL
+
+Backend secrets belong in:
+
+.env
+
+Never put API keys, JWT secrets, database passwords or affiliate credentials in source code.
+
+Never commit .env files.
+
+---
+
+# 12. Development Principle
+
+Before changing existing functionality:
+
+1. Inspect the existing implementation.
+2. Understand the current data structure.
+3. Preserve working functionality.
+4. Make the smallest necessary change.
+5. Test the change.
+6. Continue only after the previous step works.
+
+Do not rewrite working systems unnecessarily.

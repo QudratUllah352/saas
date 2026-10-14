@@ -1,0 +1,114 @@
+/* Only the public comparison detail route; keep the shared catalog intact. */
+.public-page.comparison-detail-page { padding: 28px 24px 48px; color: #334155; }
+.public-page.comparison-detail-page .comparison-detail-container { width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 24px; }
+.public-page.comparison-detail-page .comparison-bottom-action { margin: 0; }
+.public-page.comparison-detail-page .public-back-button { min-height: 40px; padding: 8px 12px; font-size: 13px; border-radius: 10px; }
+.public-page.comparison-detail-page :is(.comparison-detail-hero, .comparison-detail-product, .comparison-quick-verdict, .comparison-content-section, .comparison-on-page, .comparison-related-content, .comparison-affiliate-section) {
+  width: 100%; margin: 0; padding: 24px; background: #fff; border: 1px solid #dcebef; border-radius: 16px; box-shadow: 0 4px 18px rgb(14 116 144 / 4%);
+}
+.public-page.comparison-detail-page .comparison-detail-label { margin: 0 0 8px; font-size: 11px; letter-spacing: .09em; color: #0e7490; }
+.public-page.comparison-detail-page .comparison-detail-hero h1 { max-width: 100%; margin: 0 0 12px; font-size: clamp(26px, 3vw, 38px); line-height: 1.2; color: #334155; }
+.public-page.comparison-detail-page .comparison-detail-excerpt { max-width: 80ch; margin: 0; font-size: 16px; line-height: 1.7; opacity: 1; }
+.public-page.comparison-detail-page .comparison-detail-meta { margin-top: 16px; gap: 0; font-size: 13px; color: #64748b; opacity: 1; }
+.public-page.comparison-detail-page .comparison-detail-meta > :not(:last-child)::after { content: '·'; display: inline-block; margin: 0 10px; }
+/* Shared rows align the identity, copy and action of each product, even with long names. */
+.public-page.comparison-detail-page .comparison-detail-products { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; align-items: stretch; margin: 0; }
+.public-page.comparison-detail-page .comparison-detail-product { display: grid; grid-template-rows: subgrid; grid-row: span 6; row-gap: 12px; align-items: start; }
+.public-page.comparison-detail-page .comparison-detail-product > .comparison-detail-logo { grid-row: 1; }
+.public-page.comparison-detail-page .comparison-detail-product > h2 { grid-row: 2; margin: 0; font-size: 24px; line-height: 1.3; }
+.public-page.comparison-detail-page .comparison-detail-product > .comparison-product-category { grid-row: 3; margin: 0; font-size: 12px; font-weight: 650; color: #0e7490; opacity: 1; }
+.public-page.comparison-detail-page .comparison-detail-product > p { grid-row: 4; margin: 0; font-size: 15px; line-height: 1.7; color: #334155; opacity: 1; }
+.public-page.comparison-detail-page .comparison-detail-product > .affiliate-cta-wrapper { display: grid; grid-template-rows: subgrid; grid-row: 5 / span 2; margin: 0; padding: 0; align-self: stretch; }
+.public-page.comparison-detail-page .comparison-detail-product .affiliate-cta-button { grid-row: 1; height: 100%; }
+.public-page.comparison-detail-page .comparison-detail-product .affiliate-cta-disclosure { grid-row: 2; margin: 0; }
+.public-page.comparison-detail-page .comparison-detail-products > .comparison-detail-product:only-child { grid-column: 1 / -1; }
+.public-page.comparison-detail-page .comparison-detail-logo { width: 52px; height: 52px; flex-shrink: 0; border-radius: 12px; border-color: #dcebef; background: #f5fbfc; color: #0e7490; font-size: 22px; }
+.public-page.comparison-detail-page .comparison-detail-logo img { padding: 6px; }
+.public-page.comparison-detail-page .comparison-detail-vs { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #c7e8ee; border-radius: 50%; background: #e6f7fa; color: #0e7490; font-size: 11px; line-height: 1; z-index: 1; }
+.public-page.comparison-detail-page .affiliate-cta-wrapper { max-width: 100%; }
+.public-page.comparison-detail-page .affiliate-cta-button { min-height: 46px; padding: 12px 16px; margin: 0; border: 0; border-radius: 10px; background: #0e7490; color: #fff; font-size: 14px; line-height: 1.4; box-shadow: none; }
+.public-page.comparison-detail-page .affiliate-cta-button:hover { background: #155e75; transform: none; box-shadow: 0 3px 10px rgb(14 116 144 / 12%); }
+.public-page.comparison-detail-page .affiliate-cta-disclosure { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: #64748b; }
+.public-page.comparison-detail-page :is(.comparison-content-section, .comparison-quick-verdict) > h2 { margin: 0 0 12px; font-size: clamp(21px, 2vw, 26px); line-height: 1.3; }
+.public-page.comparison-detail-page :is(.comparison-content-section, .comparison-quick-verdict) > p { max-width: 85ch; margin: 0; font-size: 16px; line-height: 1.8; white-space: pre-line; }
+.public-page.comparison-detail-page .comparison-verdict-grid { margin-top: 20px; gap: 20px; align-items: start; }
+.public-page.comparison-detail-page :is(.comparison-verdict-grid, .comparison-deep-dive-grid, .comparison-pricing-grid) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.public-page.comparison-detail-page :is(.comparison-verdict-grid, .comparison-deep-dive-grid, .comparison-pricing-grid) > :only-child { grid-column: 1 / -1; }
+.public-page.comparison-detail-page :is(.comparison-verdict-card, .comparison-deep-dive-card, .comparison-pricing-card) { padding: 20px; border: 1px solid #dcebef; border-radius: 12px; background: #f5fbfc; }
+.public-page.comparison-detail-page :is(.comparison-verdict-card, .comparison-deep-dive-card, .comparison-pricing-card) h3 { margin: 0 0 12px; font-size: 20px; line-height: 1.35; }
+.public-page.comparison-detail-page .comparison-verdict-card h3 { margin-top: 6px; }
+.public-page.comparison-detail-page .comparison-verdict-card ul { margin: 0; }
+.public-page.comparison-detail-page .comparison-verdict-card li { margin: 8px 0 0; font-size: 14px; line-height: 1.7; color: #334155; }
+.public-page.comparison-detail-page .comparison-on-page { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px 20px; box-shadow: none; }
+.public-page.comparison-detail-page .comparison-on-page > span { margin: 0; font-size: 10px; }
+.public-page.comparison-detail-page .comparison-on-page-links { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+.public-page.comparison-detail-page .comparison-on-page-links a { width: auto; min-height: 40px; padding: 8px 12px; font-size: 13px; line-height: 1.5; background: #f5fbfc; }
+.public-page.comparison-detail-page .comparison-on-page-links a:hover { background: #e6f7fa; }
+/* The table scrolls inside its focusable region; feature and product headers remain visible. */
+.public-page.comparison-detail-page .comparison-content-section > .comparison-table-help { margin: 12px 0; font-size: 12px; line-height: 1.6; color: #64748b; }
+.public-page.comparison-detail-page .comparison-table-wrapper { max-width: 100%; max-height: 560px; overflow: auto; overscroll-behavior: contain; border: 1px solid #dcebef; border-radius: 12px; background: #fff; }
+.public-page.comparison-detail-page .comparison-table { width: 100%; min-width: 640px; table-layout: fixed; border-collapse: separate; border-spacing: 0; margin: 0; }
+.public-page.comparison-detail-page .comparison-table-caption { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.public-page.comparison-detail-page .comparison-table :is(th, td) { padding: 14px 16px; border: 0; border-bottom: 1px solid #e4eef1; vertical-align: top; font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
+.public-page.comparison-detail-page .comparison-table tr > :first-child { width: 24%; }
+.public-page.comparison-detail-page .comparison-table tr > :not(:first-child) { width: 38%; }
+.public-page.comparison-detail-page .comparison-table thead th { position: sticky; top: 0; z-index: 2; background: #e6f7fa; color: #0e7490; border-bottom-color: #c7e8ee; }
+.public-page.comparison-detail-page .comparison-table tr > :first-child { position: sticky; left: 0; z-index: 1; background: #f5fbfc; border-right: 1px solid #dcebef; }
+.public-page.comparison-detail-page .comparison-table thead tr > :first-child { z-index: 3; background: #e6f7fa; }
+.public-page.comparison-detail-page .comparison-table tbody th { font-weight: 650; color: #334155; }
+.public-page.comparison-detail-page .comparison-table tbody tr:nth-child(even) td { background: #fbfdfe; }
+.public-page.comparison-detail-page .comparison-table tbody tr:hover td { background: #f0fafc; }
+.public-page.comparison-detail-page .comparison-table tbody tr:last-child > :is(th, td) { border-bottom: 0; }
+.public-page.comparison-detail-page .comparison-missing-value { font-size: 13px; color: #64748b; font-style: italic; }
+.public-page.comparison-detail-page .comparison-content-section > .comparison-pricing-note { margin-top: 12px; font-size: 12px; line-height: 1.6; color: #64748b; }
+.public-page.comparison-detail-page :is(.comparison-deep-dive-grid, .comparison-pricing-grid) { margin-top: 20px; }
+.public-page.comparison-detail-page :is(.comparison-deep-dive-card, .comparison-pricing-card) > p { margin: 0; font-size: 15px; line-height: 1.8; color: #334155; white-space: pre-line; }
+.public-page.comparison-detail-page .comparison-deep-section { margin-top: 20px; padding-top: 16px; border-color: #dcebef; }
+.public-page.comparison-detail-page .comparison-deep-section h4 { margin: 0 0 10px; font-size: 15px; color: #0e7490; }
+.public-page.comparison-detail-page .comparison-deep-section ul { margin: 0; padding-left: 18px; }
+.public-page.comparison-detail-page .comparison-deep-section li { margin: 0 0 8px; font-size: 14px; line-height: 1.75; color: #334155; }
+.public-page.comparison-detail-page .comparison-deep-section li:last-child { margin-bottom: 0; }
+.public-page.comparison-detail-page #pricing-comparison { scroll-margin-top: 100px; }
+.public-page.comparison-detail-page .comparison-conclusion { border-top: 3px solid #67c6d8; }
+.public-page.comparison-detail-page .comparison-share { margin: 0; padding: 16px 20px; border-color: #dcebef; border-radius: 12px; }
+.public-page.comparison-detail-page .comparison-share-buttons { gap: 8px; }
+.public-page.comparison-detail-page .comparison-share-buttons :is(a, button) { min-height: 40px; padding: 8px 12px; font-size: 12px; }
+.public-page.comparison-detail-page .comparison-related-heading { margin-bottom: 20px; }
+.public-page.comparison-detail-page .comparison-related-heading h2 { margin: 6px 0 8px; font-size: 26px; }
+.public-page.comparison-detail-page .comparison-related-heading p { margin: 0; font-size: 14px; }
+.public-page.comparison-detail-page .comparison-related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.public-page.comparison-detail-page .comparison-related-card { padding: 20px; border-color: #dcebef; border-radius: 12px; }
+.public-page.comparison-detail-page .comparison-related-card h3 { font-size: 18px; }
+.public-page.comparison-detail-page .comparison-related-card p { font-size: 14px; line-height: 1.7; }
+.public-page.comparison-detail-page .comparison-related-card:hover { transform: none; border-color: #67c6d8; box-shadow: 0 4px 16px rgb(14 116 144 / 7%); }
+.public-page.comparison-detail-page .comparison-affiliate-section { max-width: 100%; background: #e6f7fa; }
+.public-page.comparison-detail-page .comparison-affiliate-header { margin-bottom: 20px; }
+.public-page.comparison-detail-page .comparison-affiliate-header h2 { margin: 0 0 8px; font-size: 26px; }
+.public-page.comparison-detail-page .comparison-affiliate-header p { font-size: 14px; line-height: 1.7; color: #334155; }
+.public-page.comparison-detail-page .comparison-affiliate-grid { gap: 20px; align-items: stretch; }
+.public-page.comparison-detail-page .comparison-affiliate-card { padding: 20px; gap: 16px; border-color: #dcebef; border-radius: 12px; }
+.public-page.comparison-detail-page .comparison-affiliate-card > .affiliate-cta-wrapper { margin-top: auto; }
+.public-page.comparison-detail-page .comparison-affiliate-card .affiliate-cta-button { width: 100%; }
+.public-page.comparison-detail-page .comparison-affiliate-card h3 { font-size: 20px; }
+.public-page.comparison-detail-page .comparison-affiliate-card p { font-size: 14px; line-height: 1.7; color: #334155; }
+@media (max-width: 900px) {
+  .public-page.comparison-detail-page .comparison-related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .public-page.comparison-detail-page { padding: 20px 16px 32px; }
+  .public-page.comparison-detail-page .comparison-detail-container { gap: 20px; }
+  .public-page.comparison-detail-page :is(.comparison-detail-hero, .comparison-detail-product, .comparison-quick-verdict, .comparison-content-section, .comparison-on-page, .comparison-related-content, .comparison-affiliate-section) { padding: 16px; border-radius: 12px; }
+  .public-page.comparison-detail-page .comparison-detail-hero h1 { font-size: 26px; }
+  .public-page.comparison-detail-page .comparison-detail-excerpt { font-size: 15px; }
+  .public-page.comparison-detail-page .comparison-detail-products { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .public-page.comparison-detail-page .comparison-detail-product { display: flex; flex-direction: column; gap: 12px; grid-row: auto; }
+  .public-page.comparison-detail-page .comparison-detail-product h2 { font-size: 22px; }
+  .public-page.comparison-detail-page .comparison-detail-product .affiliate-cta-wrapper { display: block; width: 100%; }
+  .public-page.comparison-detail-page .comparison-detail-product .affiliate-cta-button { width: 100%; height: auto; }
+  .public-page.comparison-detail-page .comparison-detail-product .affiliate-cta-disclosure { margin-top: 10px; }
+  .public-page.comparison-detail-page .comparison-detail-vs { position: static; transform: none; justify-self: center; width: 32px; height: 32px; }
+  .public-page.comparison-detail-page :is(.comparison-verdict-grid, .comparison-deep-dive-grid, .comparison-pricing-grid, .comparison-affiliate-grid, .comparison-related-grid) { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .public-page.comparison-detail-page :is(.comparison-verdict-card, .comparison-deep-dive-card, .comparison-pricing-card, .comparison-affiliate-card, .comparison-related-card) { padding: 16px; }
+  .public-page.comparison-detail-page .comparison-table :is(th, td) { padding: 12px; font-size: 13px; }
+  .public-page.comparison-detail-page .comparison-share { padding: 16px; }
+}

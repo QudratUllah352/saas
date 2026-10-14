@@ -1,0 +1,405 @@
+# SaaSpin AI Coding Instructions
+
+## Project
+
+This repository contains SaaSpin, a SaaS discovery, deals,
+reviews, comparisons, blogs, search, affiliate marketing,
+and administration platform.
+
+Before making significant changes, read:
+
+- PROJECT.md
+- docs/DESIGN_SYSTEM.md
+- docs/ARCHITECTURE.md
+- docs/DATABASE.md
+- docs/API.md
+- docs/SEO.md
+- docs/SECURITY.md
+
+Do not assume functionality that is not documented or present
+in the existing code.
+
+---
+
+# Project Structure
+
+Frontend:
+
+saaspic-frontend/
+
+Backend:
+
+saaspic-backend/
+
+Do not mix frontend and backend responsibilities.
+
+---
+
+# Technology
+
+Frontend:
+
+- Next.js
+- React
+- JavaScript
+- Next.js App Router
+- CSS
+
+Backend:
+
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- JWT authentication
+- Gemini API
+
+---
+
+# Development URLs
+
+Frontend:
+
+http://localhost:3000
+
+Backend:
+
+http://localhost:5000
+
+Backend API:
+
+http://localhost:5000/api
+
+Use environment variables where available instead of introducing
+new hardcoded production URLs.
+
+---
+
+# Coding Rules
+
+Before modifying an existing feature:
+
+1. Inspect the existing implementation.
+2. Understand the current data model.
+3. Understand existing routes and dependencies.
+4. Preserve working functionality.
+5. Make the smallest appropriate change.
+6. Test the change.
+7. Fix errors before continuing.
+
+Do not rewrite working files merely to change style.
+
+Do not invent MongoDB fields.
+
+Do not invent API endpoints.
+
+Do not remove functionality unless specifically requested.
+
+---
+
+# Design System
+
+Follow:
+
+docs/DESIGN_SYSTEM.md
+
+SaaSpin should maintain one consistent visual identity.
+
+Primary:
+
+#635bff
+
+Dark:
+
+#111827
+
+Text:
+
+#6b7280
+
+Background:
+
+#f7f8fc
+
+Surface:
+
+#ffffff
+
+Border:
+
+#e8e9ef
+
+Success:
+
+#22c55e
+
+Prefer CSS variables from the global design system instead of
+repeating raw values.
+
+Main content width:
+
+1180px
+
+Cards generally use:
+
+- white background
+- subtle border
+- 14px–16px radius
+- subtle shadow
+- restrained hover effect
+
+Avoid introducing unrelated colors or completely different page
+styles.
+
+---
+
+# Public Navigation
+
+Main navigation:
+
+- Deals
+- Reviews
+- Comparisons
+- Blog
+- Search
+- Submit Deal
+
+Do not add Admin to the public Navbar or Footer.
+
+---
+
+# Deal Routing
+
+Category filtering uses ONE Deals page.
+
+Correct:
+
+/deals?category=ai
+/deals?category=marketing
+/deals?category=crm
+
+Do not introduce:
+
+/deals/ai
+/deals/marketing
+
+Individual deal pages use the existing deal-details routing.
+
+Preserve the distinction between category filtering and individual
+deal details.
+
+---
+
+# Public Product Data
+
+Product data may contain private affiliate information.
+
+Public APIs must NOT expose:
+
+affiliate.url
+affiliate.programName
+affiliate.network
+affiliate.commissionType
+affiliate.commissionValue
+
+Public APIs may expose:
+
+affiliate.enabled
+affiliate.disclosureText
+
+Use the existing public product projection where appropriate.
+
+Before populating Product in a public controller, verify that
+private affiliate fields cannot leak.
+
+---
+
+# Affiliate Marketing
+
+Affiliate destination URLs belong on the backend.
+
+Correct flow:
+
+User
+→ SaaSpin CTA
+→ Backend affiliate tracking endpoint
+→ Record click
+→ Redirect to affiliate destination
+
+Do not place private affiliate destination URLs directly in
+public frontend data.
+
+Affiliate links should use:
+
+rel="noopener noreferrer sponsored"
+
+Do not invent affiliate programs, commission rates, tracking IDs,
+or affiliate relationships.
+
+---
+
+# Admin
+
+Admin pages live under:
+
+/admin
+
+Admin pages must:
+
+- not appear in public navigation
+- not appear in the public sitemap
+- use noindex
+- use nofollow
+
+SEO hiding is NOT security.
+
+Backend authentication and authorization must protect privileged
+admin actions.
+
+---
+
+# Authentication
+
+Admin authentication currently uses JWT.
+
+Do not remove backend authentication from protected endpoints.
+
+Do not treat frontend route hiding as authorization.
+
+Never expose JWT secrets.
+
+---
+
+# AI Content
+
+Gemini calls belong on the backend.
+
+Never expose GEMINI_API_KEY to the frontend.
+
+Correct:
+
+Admin UI
+→ Backend
+→ Gemini
+→ Draft
+→ Admin review
+→ Publish
+
+AI-generated reviews, comparisons, and blogs are drafts.
+
+Do not automatically publish AI-generated content.
+
+Do not invent product facts.
+
+---
+
+# SEO
+
+Public content should be SEO-friendly.
+
+Important pages include:
+
+/
+/deals
+/deals/[detail]
+/reviews
+/reviews/[slug]
+/comparisons
+/comparisons/[slug]
+/blogs
+/blogs/[slug]
+
+Important public pages should have appropriate:
+
+- titles
+- meta descriptions
+- canonical URLs
+- Open Graph metadata
+- semantic headings
+- internal links
+- image alt text
+
+Only published public content belongs in the sitemap.
+
+Never put /admin URLs in the sitemap.
+
+---
+
+# Security
+
+Never expose or commit:
+
+- .env
+- MONGODB_URI
+- JWT_SECRET
+- GEMINI_API_KEY
+- passwords
+- private affiliate links
+- private credentials
+
+Secrets must remain server-side.
+
+---
+
+# Database
+
+MongoDB is accessed through Mongoose.
+
+Before modifying schemas:
+
+1. Inspect the existing model.
+2. Check controllers using that model.
+3. Check frontend dependencies.
+4. Consider existing MongoDB documents.
+5. Avoid unnecessary breaking schema changes.
+
+---
+
+# Error Handling
+
+When an error occurs:
+
+Do not continue adding unrelated functionality.
+
+First:
+
+1. Read the error.
+2. Identify the responsible file.
+3. Identify the failing line or request.
+4. Fix the root cause.
+5. Retest.
+6. Continue development only after the feature works.
+
+---
+
+# Code Quality
+
+Prefer:
+
+- clear names
+- reusable components
+- small functions
+- consistent formatting
+- environment variables
+- semantic HTML
+- accessible controls
+- responsive CSS
+
+Avoid:
+
+- duplicate code
+- giant components when splitting is useful
+- hardcoded secrets
+- unnecessary dependencies
+- unnecessary rewrites
+- fake production data
+
+---
+
+# Final Rule
+
+Existing working SaaSpin functionality should be preserved unless
+the requested task specifically requires changing it.
+
+When uncertain about an existing implementation, inspect the
+relevant file before modifying it.

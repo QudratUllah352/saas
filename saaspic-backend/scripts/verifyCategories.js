@@ -1,0 +1,31 @@
+require('dotenv').config({ quiet: true });
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const mongoose = require('mongoose');
+const { categories, canonicalSlug } = require('../utils/categories');
+assert.equal(categories.length, 6);
+assert.equal(new Set(categories.map((item) => item.slug)).size, 6);
+assert.deepEqual(categories, JSON.parse(fs.readFileSync(path.join(__dirname, '../../saaspic-frontend/src/lib/categories.json'), 'utf8')));
+for (const category of categories) for (const alias of [category.name, category.slug, ...category.aliases]) assert.equal(canonicalSlug(alias), category.slug);
+assert.equal(canonicalSlug('finance'), 'finance');
+assert.equal(canonicalSlug('analytics'), 'analytics');
+async function run() {
+  if (!process.argv.includes('--database')) return console.log('Category definitions and legacy aliases verified.');
+  await mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 10000 });
+  const db = mongoose.connection.db;
+  const records = await db.collection('categories').find({}).toArray();
+  assert.equal(records.filter((item) => item.isMain).length, 6);
+  for (const category of categories) assert.equal(records.filter((item) => item.isMain && item.slug === category.slug && item.name === category.name).length, 1);
+  const { getCategories } = require('../controllers/categoryController');
+  let apiCategories;
+  await getCategories({}, { status(code) { assert.equal(code, 200); return this; }, json(value) { apiCategories = value; } });
+  assert.deepEqual(apiCategories.map((item) => ({ name: item.name, slug: item.slug })), categories.map((item) => ({ name: item.name, slug: item.slug })));
+  const backups = fs.readdirSync(path.join(__dirname, '../migration-backups')).sort();
+  const backup = mongoose.mongo.BSON.EJSON.parse(fs.readFileSync(path.join(__dirname, '../migration-backups', backups.at(-1)), 'utf8'));
+  for (const category of backup.categories) assert(records.some((item) => item._id.equals(category._id)), 'Existing category ID missing');
+  const counts = {};
+  for (const name of ['products', 'deals', 'reviews', 'comparisons', 'dealsubmissions']) counts[name] = await db.collection(name).countDocuments();
+  console.log(JSON.stringify({ verified: true, counts, submissions: await db.collection('dealsubmissions').distinct('category'), legacy: records.filter((item) => !item.isMain).map((item) => item.name) }, null, 2));
+}
+run().catch((error) => { console.error(error); process.exitCode = 1; }).finally(() => mongoose.disconnect());

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "AI Tools",
+    "slug": "ai-tools",
+    "icon": "✨",
+    "aliases": [
+      "ai",
+      "artificial-intelligence"
+    ]
+  },
+  {
+    "name": "SEO & Marketing",
+    "slug": "seo-marketing",
+    "icon": "↗",
+    "aliases": [
+      "marketing",
+      "seo"
+    ]
+  },
+  {
+    "name": "Video & Design",
+    "slug": "video-design",
+    "icon": "✦",
+    "aliases": [
+      "design",
+      "video"
+    ]
+  },
+  {
+    "name": "Sales & CRM",
+    "slug": "sales-crm",
+    "icon": "◎",
+    "aliases": [
+      "crm",
+      "sales"
+    ]
+  },
+  {
+    "name": "Productivity",
+    "slug": "productivity",
+    "icon": "✓",
+    "aliases": []
+  },
+  {
+    "name": "Development",
+    "slug": "development",
+    "icon": "</>",
+    "aliases": []
+  }
+]
