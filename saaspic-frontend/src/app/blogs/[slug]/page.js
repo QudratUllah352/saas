@@ -1,7 +1,8 @@
 import "@/app/public-pages.css";
 import "@/app/blog-layout.css";
 import "./blog-detail.css";
-import { pageMetadata, unavailableMetadata } from "@/lib/seo";
+import { getSiteUrl, pageMetadata } from "@/lib/seo";
+import { notFound } from "next/navigation";
 import { API_URL } from "@/lib/api";
 import Link from "next/link";
 import Navbar from "../../../components/Navbar";
@@ -9,47 +10,27 @@ import Footer from "../../../components/Footer";
 import AffiliateButton from "../../../components/AffiliateButton";
 import BlogShare from "../../../components/BlogShare";
 
+async function getBlog(slug) {
+  const response = await fetch(`${API_URL}/blogs/${encodeURIComponent(slug)}`, {
+    cache: "no-store",
+    signal: AbortSignal.timeout(10000),
+  });
+  if (response.status === 404) notFound();
+  if (!response.ok) throw new Error("Failed to fetch blog");
+  return response.json();
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-
-  try {
-    const response = await fetch(
-      `${API_URL}/blogs/${slug}`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      return unavailableMetadata("Blog unavailable");
-    }
-
-    const blog = await response.json();
-
-    const title =
-      blog.title ||
-      "SaaS Guide";
-
-    const description =
-      blog.excerpt ||
-      blog.introduction ||
-      "Explore SaaS insights, software guides, and practical resources from SaaSpin.";
-
-    return pageMetadata({
-      title,
-      description,
-      path: `/blogs/${encodeURIComponent(blog.slug)}`,
-      image: blog.coverImage || undefined,
-      type: "article",
-    });
-  } catch (error) {
-    console.error(
-      "Blog metadata fetch error:",
-      error
-    );
-
-    return unavailableMetadata("Blog unavailable");
-  }
+  const blog = await getBlog(slug);
+  return pageMetadata({
+    title: blog.title || "SaaS Guide",
+    description: blog.excerpt || blog.introduction ||
+      "Explore SaaS insights, software guides, and practical resources from SaaSpin.",
+    path: `/blogs/${encodeURIComponent(blog.slug)}`,
+    image: blog.coverImage || undefined,
+    type: "article",
+  });
 }
 async function getRelatedReviews(productIds) {
   if (!productIds.length) return [];
@@ -59,6 +40,7 @@ async function getRelatedReviews(productIds) {
       `${API_URL}/reviews`,
       {
         cache: "no-store",
+        signal: AbortSignal.timeout(10000),
       }
     );
 
@@ -88,6 +70,7 @@ async function getRelatedComparisons(
       `${API_URL}/comparisons`,
       {
         cache: "no-store",
+        signal: AbortSignal.timeout(10000),
       }
     );
 
@@ -124,6 +107,7 @@ async function getRelatedBlogs(
       `${API_URL}/blogs`,
       {
         cache: "no-store",
+        signal: AbortSignal.timeout(10000),
       }
     );
 
@@ -159,37 +143,7 @@ export default async function BlogDetailPage({ params }) {
   // Next.js 16 dynamic route
   const { slug } = await params;
 
-  const response = await fetch(
-    `${API_URL}/blogs/${slug}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return (
-      <>
-        <Navbar />
-
-        <main className="blog-error-page public-page">
-          <h1>Blog could not be loaded</h1>
-
-          <p>
-            The article may have been removed
-            or unpublished.
-          </p>
-
-          <Link href="/blogs">
-            ← Back to Blogs
-          </Link>
-        </main>
-
-        <Footer />
-      </>
-    );
-  }
-
-  const blog = await response.json();
+  const blog = await getBlog(slug);
 
   const publishedDate = blog.publishedAt
     ? new Date(
@@ -228,7 +182,17 @@ export default async function BlogDetailPage({ params }) {
       <Navbar />
 
       <main className="blog-detail-page public-page">
+        <div className="blog-detail-container">
 
+          <div className="blog-detail-bottom-back">
+
+            <Link href="/blogs">
+              ← Back to all posts
+            </Link>
+
+          </div>
+
+        </div>
 
         {/* BLOG HEADER */}
 
@@ -299,63 +263,63 @@ export default async function BlogDetailPage({ params }) {
         {/* ARTICLE + SIDEBAR */}
 
         <div className="blog-detail-layout">
-        {blog.sections?.length > 0 && (
-          <div className="blog-toc-panel">
+          {blog.sections?.length > 0 && (
+            <div className="blog-toc-panel">
 
-            <nav
-              className="blog-on-page"
-              aria-label="On this page"
-            >
-              <span>ON THIS PAGE</span>
+              <nav
+                className="blog-on-page"
+                aria-label="On this page"
+              >
+                <span>ON THIS PAGE</span>
 
-              <div className="blog-on-page-links">
+                <div className="blog-on-page-links">
 
-                {blog.introduction && <a href="#introduction">
-                  Introduction
-                </a>}
+                  {blog.introduction && <a href="#introduction">
+                    Introduction
+                  </a>}
 
-                {blog.sections.map(
-                  (section, index) => section.heading && (
-                    <a
-                      key={`${section.heading}-${index}`}
-                      href={`#section-${index}`}
-                    >
-                      {section.heading}
+                  {blog.sections.map(
+                    (section, index) => section.heading && (
+                      <a
+                        key={`${section.heading}-${index}`}
+                        href={`#section-${index}`}
+                      >
+                        {section.heading}
+                      </a>
+                    )
+                  )}
+
+                  {blog.conclusion && (
+                    <a href="#final-thoughts">
+                      Final Thoughts
                     </a>
-                  )
-                )}
+                  )}
 
-                {blog.conclusion && (
-                  <a href="#final-thoughts">
-                    Final Thoughts
-                  </a>
-                )}
+                </div>
+              </nav>
 
-              </div>
-            </nav>
-
-          </div>
-        )}
+            </div>
+          )}
 
 
 
           {/* ARTICLE */}
 
           <article className="blog-article">
-        {/* COVER IMAGE */}
+            {/* COVER IMAGE */}
 
-        {blog.coverImage && (
+            {blog.coverImage && (
 
-          <div className="blog-detail-cover">
+              <div className="blog-detail-cover">
 
-            <img
-              src={blog.coverImage}
-              alt={blog.title}
-            />
+                <img
+                  src={blog.coverImage}
+                  alt={blog.title}
+                />
 
-          </div>
+              </div>
 
-        )}
+            )}
 
 
 
@@ -419,6 +383,7 @@ export default async function BlogDetailPage({ params }) {
 
             </section>}
             <BlogShare
+              siteUrl={getSiteUrl()}
               title={blog.title}
               slug={blog.slug}
             />
@@ -645,17 +610,7 @@ export default async function BlogDetailPage({ params }) {
             </section>
 
           )}
-        <div className="blog-detail-container">
 
-          <div className="blog-detail-bottom-back">
-
-            <Link href="/blogs">
-              ← Back to all posts
-            </Link>
-
-          </div>
-
-        </div>
       </main>
 
       <Footer />

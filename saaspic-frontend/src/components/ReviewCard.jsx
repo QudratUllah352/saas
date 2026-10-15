@@ -4,8 +4,8 @@ export default function ReviewCard({ review }) {
   const product = review?.product || {};
   const category = product?.category?.name || "SaaS";
 
-  const rating =
-    Number(review?.overallRating) || 0;
+  const rating = review?.overallRating;
+  const hasRating = typeof rating === "number" && Number.isFinite(rating) && rating >= 0 && rating <= 5;
 
   return (
     <article className="premium-review-card">
@@ -16,10 +16,10 @@ export default function ReviewCard({ review }) {
           {category}
         </span>
 
-        <div className="premium-review-rating">
+        {hasRating && <div className="premium-review-rating">
           <span>★</span>
           <strong>{rating.toFixed(1)}</strong>
-        </div>
+        </div>}
 
       </div>
 
@@ -46,9 +46,9 @@ export default function ReviewCard({ review }) {
             SOFTWARE REVIEW
           </span>
 
-          <h3>
+          <p className="premium-review-product-name">
             {product?.name || "Software"}
-          </h3>
+          </p>
         </div>
 
       </div>
@@ -56,9 +56,9 @@ export default function ReviewCard({ review }) {
 
       <div className="premium-review-content">
 
-        <h2>
+        <h3>
           {review?.title || "Software Review"}
-        </h2>
+        </h3>
 
         <p>
           {review?.excerpt ||
@@ -87,14 +87,14 @@ export default function ReviewCard({ review }) {
 
       <div className="premium-review-meta">
 
-        <div>
-          <span>Rating</span>
+        {hasRating && <div>
+          <span>Editorial rating</span>
 
           <strong>
             {rating.toFixed(1)}
             <small>/5</small>
           </strong>
-        </div>
+        </div>}
 
         <div>
           <span>Read time</span>

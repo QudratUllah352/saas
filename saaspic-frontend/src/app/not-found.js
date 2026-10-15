@@ -2,6 +2,11 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+export const metadata = {
+  title: "Page not found",
+  robots: { index: false, follow: true },
+};
+
 export default function NotFound() {
   return (
     <>

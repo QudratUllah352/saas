@@ -11,6 +11,7 @@ function createTransporter() {
   const secure = port === 465;
 
   if (!host || !user || !pass) {
+    if (process.env.NODE_ENV === "production") throw new Error("SMTP must be configured for production email delivery.");
     return null;
   }
 
@@ -18,6 +19,7 @@ function createTransporter() {
     host,
     port,
     secure,
+    requireTLS: process.env.NODE_ENV === "production" && !secure,
     auth: {
       user,
       pass,

@@ -8,9 +8,9 @@ const Product =
 const Deal =
   require("../models/Deal");
 
-const ai = new GoogleGenAI({
+const ai = process.env.GEMINI_API_KEY ? new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
-});
+}) : null;
 
 const GEMINI_MODELS = [
   "gemini-3.8-flash",
@@ -109,6 +109,7 @@ const generateBlog = async (
   req,
   res
 ) => {
+  if (!ai) return res.status(503).json({ message: "AI generation is unavailable. Configure GEMINI_API_KEY on the backend." });
   try {
     const {
       topic,

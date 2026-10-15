@@ -9,6 +9,7 @@ export default function AdminGuard({ children }) {
 
   const [checking, setChecking] = useState(true);
   const [authorized, setAuthorized] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
 
   useEffect(() => {
     async function verifyAdmin() {
@@ -35,9 +36,14 @@ export default function AdminGuard({ children }) {
             },
 
             cache: "no-store",
+            signal: AbortSignal.timeout(10000),
           }
         );
 
+        // Temporary failures must not erase a potentially valid session.
+        if (!response.ok && response.status !== 401 && response.status !== 403) {
+          throw new Error("Admin service temporarily unavailable");
+        }
         // Invalid or expired token
         if (!response.ok) {
           localStorage.removeItem(
@@ -63,6 +69,7 @@ export default function AdminGuard({ children }) {
         );
 
         setAuthorized(false);
+        setUnavailable(true);
       } finally {
         setChecking(false);
       }
@@ -80,6 +87,14 @@ export default function AdminGuard({ children }) {
         </div>
       </div>
     );
+  }
+
+  if (unavailable) {
+    return <div className="admin-auth-loading" role="alert"><div>
+      <strong>Admin service is temporarily unavailable</strong>
+      <p>Please retry when the backend is available.</p>
+      <button type="button" onClick={() => window.location.reload()}>Try again</button>
+    </div></div>;
   }
 
   if (!authorized) {

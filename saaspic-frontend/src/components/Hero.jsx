@@ -16,7 +16,7 @@ export default function Hero({
           <div className="saaspin-hero-badge">
             <span className="saaspin-hero-badge-dot" aria-hidden="true" />
             <span className="saaspin-badge-sparkle">✨</span>
-            <span>The Independent SaaS Discovery & Review Platform</span>
+            <span>SaaS Deals, Reviews & Comparisons</span>
           </div>
 
           {/* MAIN HEADLINE */}
@@ -34,7 +34,7 @@ export default function Hero({
 
           {/* SUBTITLE */}
           <p className="saaspin-hero-description">
-            Discover vetted SaaS deals, in-depth software reviews, head-to-head
+            Discover SaaS deal listings, software reviews, side-by-side
             comparisons and practical guides to help you make confident software decisions.
           </p>
 
@@ -52,7 +52,7 @@ export default function Hero({
 
             <Link href="/reviews" className="saaspin-hero-reviews-link">
               <span className="hero-btn-star">★</span>
-              <span>Read Expert Reviews</span>
+              <span>Read Software Reviews</span>
             </Link>
           </div>
 
@@ -62,8 +62,8 @@ export default function Hero({
               <span className="saaspin-feature-check">✓</span>
               <span>
                 {totalDeals > 0
-                  ? `${totalDeals}+ Verified Deals`
-                  : "Verified SaaS Deals"}
+                  ? `${totalDeals} Deal Listings`
+                  : "Browse SaaS Deals"}
               </span>
             </div>
 
@@ -71,8 +71,8 @@ export default function Hero({
               <span className="saaspin-feature-check">✓</span>
               <span>
                 {totalReviews > 0
-                  ? `${totalReviews}+ Software Reviews`
-                  : "Expert In-Depth Reviews"}
+                  ? `${totalReviews} Software Reviews`
+                  : "Software Reviews"}
               </span>
             </div>
 
@@ -83,54 +83,10 @@ export default function Hero({
 
             <div className="saaspin-hero-feature-item">
               <span className="saaspin-feature-check">✓</span>
-              <span>100% Free Forever</span>
+              <span>Browse Deals by Category</span>
             </div>
           </div>
 
-          {/* SOCIAL PROOF BAR */}
-          <div className="saaspin-hero-social-proof">
-            <div className="hero-avatar-stack" aria-hidden="true">
-              <span
-                className="hero-avatar"
-                style={{
-                  background: "linear-gradient(135deg, #0E7490, #67C6D8)",
-                }}
-              >
-                JD
-              </span>
-              <span
-                className="hero-avatar"
-                style={{
-                  background: "linear-gradient(135deg, #ec4899, #f43f5e)",
-                }}
-              >
-                SK
-              </span>
-              <span
-                className="hero-avatar"
-                style={{
-                  background: "linear-gradient(135deg, #10b981, #059669)",
-                }}
-              >
-                MR
-              </span>
-              <span
-                className="hero-avatar"
-                style={{
-                  background: "linear-gradient(135deg, #f59e0b, #d97706)",
-                }}
-              >
-                AL
-              </span>
-            </div>
-            <div className="hero-social-text">
-              <div className="hero-stars">
-                <span className="stars-gold">★★★★★</span>
-                <strong>4.9 / 5.0 TrustScore</strong>
-              </div>
-              <p>Trusted by 10,000+ founders & creators choosing software</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

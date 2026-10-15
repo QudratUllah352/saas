@@ -5,14 +5,11 @@ import { useState } from "react";
 export default function BlogShare({
     title,
     slug,
+    siteUrl,
 }) {
     const [copied, setCopied] = useState(false);
 
-    const siteUrl =
-        process.env.NEXT_PUBLIC_SITE_URL ||
-        "http://localhost:3000";
-
-    const blogUrl = `${siteUrl}/blogs/${slug}`;
+    const blogUrl = `${siteUrl}/blogs/${encodeURIComponent(slug)}`;
 
     const encodedUrl =
         encodeURIComponent(blogUrl);

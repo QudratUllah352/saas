@@ -8,19 +8,15 @@ const Deal = require("../models/Deal");
 // CHECK GEMINI API KEY
 // ======================================================
 
-if (!process.env.GEMINI_API_KEY) {
-    throw new Error(
-        "GEMINI_API_KEY is missing from the backend .env file"
-    );
-}
+
 
 // ======================================================
 // GEMINI CLIENT
 // ======================================================
 
-const ai = new GoogleGenAI({
+const ai = process.env.GEMINI_API_KEY ? new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
-});
+}) : null;
 
 // ======================================================
 // GEMINI MODEL FALLBACK
@@ -114,6 +110,7 @@ async function generateWithFallback(prompt) {
 // ======================================================
 
 const generateReview = async (req, res) => {
+  if (!ai) return res.status(503).json({ message: "AI generation is unavailable. Configure GEMINI_API_KEY on the backend." });
     try {
         const { productId } = req.body;
 

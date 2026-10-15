@@ -38,10 +38,12 @@ async function createAdmin() {
       name: "SaaSPic Admin",
       email,
       password: hashedPassword,
+      role: "superadmin",
     });
 
     console.log("Admin created successfully");
   } catch (error) {
+    process.exitCode = 1;
     console.error(
       "Create admin error:",
       error.message

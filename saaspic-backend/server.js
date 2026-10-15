@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 
 const connectDB = require("./config/db");
+const mongoose = require("mongoose");
+const { frontendOrigin, validateEnvironment } = require("./config/environment");
 
 // Routes
 const categoryRoutes = require("./routes/categoryRoutes");
@@ -31,16 +33,16 @@ const affiliateRoutes = require(
 // Create Express app
 const app = express();
 
-// Connect to MongoDB
-connectDB();
+app.disable("x-powered-by");
+app.set("trust proxy", Number(process.env.TRUST_PROXY || 0));
 
 // ============================================
 // CORS
 // ============================================
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  process.env.FRONTEND_URL,
+  ...(process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000"]),
+  frontendOrigin(),
 ].filter(Boolean);
 
 app.use(
@@ -65,14 +67,19 @@ app.use(
 // ============================================
 
 app.use(express.json());
+app.use("/api/admin/login", require("./middleware/loginRateLimit").createLoginRateLimit());
+app.post("/api/deal-submissions", require("./middleware/loginRateLimit").createLoginRateLimit({
+  limit: 20, windowMs: 60 * 60 * 1000, message: "Too many submissions. Please retry later.",
+}));
 
 // ============================================
 // HEALTH CHECK
 // ============================================
 
 app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    message: "SaaSpin API is running",
+  const ready = mongoose.connection.readyState === 1;
+  res.status(ready ? 200 : 503).json({
+    message: ready ? "SaaSpin API is ready" : "Database unavailable",
   });
 });
 
@@ -173,7 +180,9 @@ app.use((req, res) => {
 // ============================================
 
 app.use((error, req, res, next) => {
-  console.error("Unhandled server error:", error);
+  if (error.type === "entity.parse.failed") return res.status(400).json({ message: "Invalid JSON body" });
+  if (error.type === "entity.too.large") return res.status(413).json({ message: "Request body too large" });
+  console.error("Unhandled server error:", error.name || "Error");
 
   res.status(500).json({
     message: "Internal server error",
@@ -184,10 +193,22 @@ app.use((error, req, res, next) => {
 // START SERVER
 // ============================================
 
-const PORT = process.env.PORT || 5000;
+async function start() {
+  const { port } = validateEnvironment();
+  await connectDB();
+  const server = app.listen(port, () => console.log(`API listening on port ${port}`));
+  const shutdown = () => {
+    const timeout = setTimeout(() => process.exit(1), 10000);
+    timeout.unref();
+    server.close(async () => { await mongoose.disconnect(); clearTimeout(timeout); });
+  };
+  process.once("SIGTERM", shutdown);
+  process.once("SIGINT", shutdown);
+  return server;
+}
 
-app.listen(PORT, () => {
-  console.log(
-    `Server running on http://localhost:${PORT}`
-  );
+if (require.main === module) start().catch(() => {
+  console.error("API startup failed. Check backend environment configuration and MongoDB connectivity.");
+  process.exitCode = 1;
 });
+module.exports = { app, start };

@@ -26,6 +26,7 @@ async function searchWebsite(query) {
       )}`,
       {
         cache: "no-store",
+      signal: AbortSignal.timeout(10000),
       }
     );
 

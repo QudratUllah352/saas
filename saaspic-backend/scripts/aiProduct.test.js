@@ -89,6 +89,10 @@ test('Existing product create/update handlers accept approved suggestions and re
   } finally { Product.findOne = originals.findOne; Product.create = originals.create; Product.findById = originals.findById; Category.findById = originals.categoryFind; }
 });
 test('AI and existing Product CRUD routes keep admin authentication', async () => {
+  const Admin = require('../models/Admin');
+  const originalFind = Admin.findById;
+  let role = 'user';
+  Admin.findById = () => ({ select: async () => ({ _id: 'disposable', role, status: 'active' }) });
   const app = express(); app.use(express.json()); app.use('/api/products', productRoutes);
   const server = app.listen(0, '127.0.0.1');
   await new Promise(resolve => server.once('listening', resolve));
@@ -103,6 +107,7 @@ test('AI and existing Product CRUD routes keep admin authentication', async () =
     const nonAdmin = jwt.sign({ role: 'user' }, process.env.JWT_SECRET);
     assert.equal((await fetch(base + '/ai/generate', { method: 'POST', headers: { Authorization: `Bearer ${nonAdmin}` } })).status, 403);
     const admin = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET);
+    role = 'admin';
     assert.equal((await fetch(base + '/ai/generate', { method: 'POST', headers: { Authorization: `Bearer ${admin}`, 'Content-Type': 'application/json' }, body: '{}' })).status, 400);
-  } finally { await new Promise(resolve => server.close(resolve)); }
+  } finally { Admin.findById = originalFind; await new Promise(resolve => server.close(resolve)); }
 });

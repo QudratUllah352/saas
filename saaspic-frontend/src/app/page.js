@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { categories as mainCategories } from "@/lib/categories";
-import { pageMetadata } from "@/lib/seo";
-import { API_URL } from "@/lib/api";
+import { getSiteUrl, pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { fetchPublicList } from "@/lib/public-api";
 import CategoryCard from "../components/CategoryCard";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
@@ -15,29 +16,14 @@ import Footer from "../components/Footer";
 
 
 async function fetchHomepageData(endpoint) {
-  try {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      console.error(`Homepage API failed: ${endpoint}`, response.status);
-      return [];
-    }
-
-    const data = await response.json();
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    console.error(`Homepage fetch error: ${endpoint}`, error);
-    return [];
-  }
+  return fetchPublicList(endpoint);
 }
 
-export const metadata = pageMetadata({
+export const metadata = { ...pageMetadata({
   "title": "SaaS Deals, Reviews & Comparisons",
   "description": "Discover SaaS deals, read software reviews, compare products, and explore practical SaaS guides.",
   "path": "/"
-});
+}), title: { absolute: "SaaS Deals, Reviews & Comparisons | SaaSpin" } };
 
 export default async function Home() {
   const [categoryData, deals, reviews, comparisons, blogs] =
@@ -59,6 +45,7 @@ export default async function Home() {
   return (
     <>
       <Navbar />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: "SaaSpin", url: getSiteUrl() }} />
 
       <main>
         <Hero
@@ -89,13 +76,13 @@ export default async function Home() {
                 </p>
               </div>
 
-              <a
+              <Link
                 href="/deals"
                 className="premium-section-link"
               >
                 View all deals
                 <span>→</span>
-              </a>
+              </Link>
             </div>
 
             {featuredDeals.length > 0 ? (
@@ -146,13 +133,13 @@ export default async function Home() {
                 </p>
               </div>
 
-              <a
+              <Link
                 href="/deals"
                 className="premium-section-link"
               >
                 Browse all software
                 <span>→</span>
-              </a>
+              </Link>
 
             </div>
 
@@ -193,7 +180,7 @@ export default async function Home() {
               <div className="premium-section-title">
 
                 <span className="premium-eyebrow">
-                  EXPERT REVIEWS
+                  SOFTWARE REVIEWS
                 </span>
 
                 <h2>
@@ -211,14 +198,14 @@ export default async function Home() {
               </div>
 
 
-              <a
+              <Link
                 href="/reviews"
                 className="premium-section-link"
               >
                 View all reviews
 
                 <span>→</span>
-              </a>
+              </Link>
 
             </div>
 
@@ -286,14 +273,14 @@ export default async function Home() {
 
               </div>
 
-              <a
+              <Link
                 href="/comparisons"
                 className="premium-section-link"
               >
                 View all comparisons
 
                 <span>→</span>
-              </a>
+              </Link>
 
             </div>
 
@@ -361,13 +348,13 @@ export default async function Home() {
 
               </div>
 
-              <a
+              <Link
                 href="/blogs"
                 className="premium-section-link"
               >
                 Explore all articles
                 <span>→</span>
-              </a>
+              </Link>
 
             </div>
 
@@ -395,9 +382,9 @@ export default async function Home() {
                         here as they are published.
                       </p>
 
-                      <a href="/blogs">
+                      <Link href="/blogs">
                         Browse articles →
-                      </a>
+                      </Link>
 
                     </div>
 
@@ -456,20 +443,20 @@ export default async function Home() {
 
               <div className="premium-submit-actions">
 
-                <a
+                <Link
                   href="/submit-deal"
                   className="premium-submit-primary"
                 >
                   Submit your SaaS
                   <span>→</span>
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="/deals"
                   className="premium-submit-secondary"
                 >
                   Explore deals
-                </a>
+                </Link>
 
               </div>
 
@@ -596,7 +583,7 @@ export default async function Home() {
               <div className="home-discovery-metrics">
                 <div className="home-discovery-metric-pill">
                   <span className="metric-icon">⚡</span>
-                  <span className="metric-num">{deals.length > 0 ? `${deals.length}+` : "20+"}</span>
+                  <span className="metric-num">{deals.length}</span>
                   <span className="metric-label">Deals</span>
                 </div>
                 <div className="home-discovery-metric-pill">
@@ -606,12 +593,12 @@ export default async function Home() {
                 </div>
                 <div className="home-discovery-metric-pill">
                   <span className="metric-icon">⇄</span>
-                  <span className="metric-num">{comparisons.length > 0 ? `${comparisons.length}+` : "10+"}</span>
+                  <span className="metric-num">{comparisons.length}</span>
                   <span className="metric-label">Comparisons</span>
                 </div>
                 <div className="home-discovery-metric-pill">
                   <span className="metric-icon">✍️</span>
-                  <span className="metric-num">{blogs.length > 0 ? `${blogs.length}+` : "12+"}</span>
+                  <span className="metric-num">{blogs.length}</span>
                   <span className="metric-label">Guides</span>
                 </div>
               </div>

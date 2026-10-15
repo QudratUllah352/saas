@@ -1,13 +1,15 @@
 import "@/app/public-pages.css";
 import "./deal-detail.css";
-import { pageMetadata, unavailableMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { API_URL } from "@/lib/api";
 import Link from "next/link";
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { categories, canonicalSlug } from "@/lib/categories";
 import Navbar from "../../../components/Navbar";
 import OfferTiming, { DealOfferButton } from "@/components/OfferTiming";
 import { getOfferTime } from "@/lib/dealDates";
 import Footer from "../../../components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 function isMongoId(value) {
   return /^[a-fA-F0-9]{24}$/.test(value);
@@ -16,18 +18,27 @@ function isMongoId(value) {
 async function getDeal(id) {
   const response = await fetch(`${API_URL}/deals/${id}`, {
     cache: "no-store",
+      signal: AbortSignal.timeout(10000),
   });
 
-  if (!response.ok) {
-    return null;
-  }
+  if (response.status === 404) notFound();
+  if (!response.ok) throw new Error("Failed to fetch deal");
 
-  return response.json();
+  const deal = await response.json();
+  if (!deal?.product) notFound();
+  return deal;
+}
+
+function redirectCategory(slug) {
+  const category = canonicalSlug(slug);
+  if (!categories.some((item) => item.slug === category)) notFound();
+  permanentRedirect(`/deals?category=${encodeURIComponent(category)}`);
 }
 async function getProductReview(productId) {
   try {
     const response = await fetch(`${API_URL}/reviews`, {
       cache: "no-store",
+      signal: AbortSignal.timeout(10000),
     });
 
     if (!response.ok) {
@@ -49,6 +60,7 @@ async function getRelatedDeals(categorySlug, currentDealId) {
       `${API_URL}/deals/category/${encodeURIComponent(categorySlug)}`,
       {
         cache: "no-store",
+      signal: AbortSignal.timeout(10000),
       },
     );
 
@@ -70,21 +82,14 @@ export async function generateMetadata({ params }) {
 
   // Non-MongoDB slugs are category URLs handled by the page redirect.
   if (!isMongoId(slug)) {
-    return unavailableMetadata("Deal unavailable");
+    redirectCategory(slug);
   }
 
   const deal = await getDeal(slug);
 
-  if (!deal?.product) {
-    return unavailableMetadata("Deal unavailable");
-  }
-
   const product = deal.product;
 
-  const description =
-    product.shortDescription ||
-    product.description ||
-    `Discover the latest ${product.name} SaaS deal on SaaSpin.`;
+  const description = `View the ${product.name} deal, listed pricing and offer schedule. Explore product information and confirm current terms with the provider.`;
 
   return pageMetadata({
     title: `${product.name} Deal`,
@@ -104,20 +109,6 @@ export default async function DealPage({ params }) {
   if (isMongoId(slug)) {
     const deal = await getDeal(slug);
 
-    if (!deal?.product) {
-      return (
-        <>
-          <Navbar />
-
-          <main className="deal-detail-page public-page">
-            <div className="deal-detail-container">
-              <h1>Deal not found</h1>
-            </div>
-          </main>
-        </>
-      );
-    }
-
     const offerNow = await getOfferTime();
     const product = deal.product;
     const review = await getProductReview(product._id);
@@ -131,6 +122,7 @@ export default async function DealPage({ params }) {
 
         <main className="deal-detail-page public-page">
           <div className="deal-detail-container">
+            <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Deals", path: "/deals" }, { name: `${product.name} Deal`, path: `/deals/${encodeURIComponent(deal._id)}` }]} />
             <Link href="/deals" className="back-link">
               ← Back to Deals
             </Link>
@@ -146,10 +138,10 @@ export default async function DealPage({ params }) {
 
                 <div className="deal-detail-intro">
                   <span className="deal-category">
-                    {product.category?.name || "Software"}
+                    {product.category?.slug ? <Link href={`/deals?category=${encodeURIComponent(canonicalSlug(product.category.slug))}`}>{product.category.name}</Link> : "Software"}
                   </span>
 
-                  <h1>{product.name}</h1>
+                  <h1>{product.name} Deal</h1>
 
                   <p>{product.shortDescription || product.description}</p>
                 </div>
@@ -264,8 +256,6 @@ export default async function DealPage({ params }) {
                       <span className="product-offer-discount">{deal.discount}</span>
 
                       <h3>{product.name} Deal</h3>
-
-                      <p>{product.shortDescription || product.description}</p>
 
                       <div className="product-offer-pricing">
                         <div>
@@ -620,5 +610,5 @@ export default async function DealPage({ params }) {
     );
   }
 
-  permanentRedirect(`/deals?category=${encodeURIComponent(slug)}`);
+  redirectCategory(slug);
 }

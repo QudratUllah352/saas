@@ -1,8 +1,7 @@
 import { getSiteUrl } from "@/lib/seo";
 
 export default function robots() {
-  const siteUrl =
-    getSiteUrl() || "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   return {
     rules: [

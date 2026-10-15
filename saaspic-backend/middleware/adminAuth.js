@@ -35,7 +35,7 @@ const adminAuth = async (req, res, next) => {
       });
     }
 
-    if (adminUser.status === "deactivated") {
+    if (adminUser.status !== "active") {
       return res.status(403).json({
         message: "Your account has been deactivated. Please contact a Super Administrator.",
       });
@@ -49,7 +49,10 @@ const adminAuth = async (req, res, next) => {
     }
 
     // Attach current admin and their role to request object
-    const effectiveRole = adminUser.role || decoded.role || "admin";
+    const effectiveRole = adminUser.role || "admin";
+    if (!["superadmin", "admin", "editor"].includes(effectiveRole)) {
+      return res.status(403).json({ message: "Account does not have an administrative role." });
+    }
 
     req.admin = {
       id: adminUser._id.toString(),

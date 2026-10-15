@@ -5,15 +5,12 @@ import { useState } from "react";
 export default function ComparisonShare({
   title,
   slug,
+  siteUrl,
 }) {
   const [copied, setCopied] = useState(false);
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "http://localhost:3000";
-
   const comparisonUrl =
-    `${siteUrl}/comparisons/${slug}`;
+    `${siteUrl}/comparisons/${encodeURIComponent(slug)}`;
 
   const encodedUrl =
     encodeURIComponent(comparisonUrl);

@@ -1,6 +1,6 @@
 import "@/app/public-pages.css";
 import "./comparison-detail.css";
-import { pageMetadata, unavailableMetadata } from "@/lib/seo";
+import { getSiteUrl, pageMetadata } from "@/lib/seo";
 import { API_URL } from "@/lib/api";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,12 +14,11 @@ async function getComparison(slug) {
     `${API_URL}/comparisons/${slug}`,
     {
       cache: "no-store",
+      signal: AbortSignal.timeout(10000),
     }
   );
 
-  if (response.status === 404) {
-    return null;
-  }
+  if (response.status === 404) notFound();
 
   if (!response.ok) {
     throw new Error(
@@ -27,7 +26,9 @@ async function getComparison(slug) {
     );
   }
 
-  return response.json();
+  const comparison = await response.json();
+  if (!comparison?.productA || !comparison?.productB) notFound();
+  return comparison;
 }
 async function getRelatedReviews(productAId, productBId) {
   try {
@@ -118,10 +119,6 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
 
   const comparison = await getComparison(slug);
-
-  if (!comparison) {
-    return unavailableMetadata("Comparison not found");
-  }
 
   const productAName =
     comparison.productA?.name || "Software A";
@@ -721,6 +718,7 @@ export default async function ComparisonPage({
 
           </section>}
           <ComparisonShare
+            siteUrl={getSiteUrl()}
             title={comparison.title}
             slug={comparison.slug}
           />

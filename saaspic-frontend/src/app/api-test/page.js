@@ -1,4 +1,10 @@
 import { API_URL } from "@/lib/api";
+import { notFound } from "next/navigation";
+
+export const metadata = {
+  title: "Development diagnostic",
+  robots: { index: false, follow: false },
+};
 async function getDeals() {
   const response = await fetch(`${API_URL}/deals`, {
     cache: "no-store",
@@ -12,6 +18,7 @@ async function getDeals() {
 }
 
 export default async function ApiTestPage() {
+  if (process.env.NODE_ENV === "production") notFound();
   const deals = await getDeals();
 
   return (

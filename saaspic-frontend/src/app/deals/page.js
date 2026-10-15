@@ -2,6 +2,7 @@ import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
 import { API_URL } from "@/lib/api";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { getOfferStatus } from "@/lib/dealDates";
 import { canonicalSlug } from "@/lib/categories";
 
@@ -13,6 +14,7 @@ import Footer from "../../components/Footer";
 async function getDeals() {
   const response = await fetch(`${API_URL}/deals`, {
     cache: "no-store",
+      signal: AbortSignal.timeout(10000),
   });
 
   if (!response.ok) {
@@ -25,6 +27,7 @@ async function getDeals() {
 async function getCategories() {
   const response = await fetch(`${API_URL}/categories`, {
     cache: "no-store",
+      signal: AbortSignal.timeout(10000),
   });
 
   if (!response.ok) {
@@ -38,12 +41,33 @@ async function getCategories() {
   return categories;
 }
 
-export const metadata = pageMetadata({
-  title: "SaaS Deals",
-  description:
-    "Browse active SaaS deals and filter software offers by category.",
-  path: "/deals",
-});
+function categorySelection(params, categories) {
+  for (const key of ["category", "search", "sort"]) {
+    if (params?.[key] !== undefined && typeof params[key] !== "string") notFound();
+  }
+  const slug = canonicalSlug(params?.category) || "all";
+  const category = categories.find((item) => item.slug === slug);
+  if (slug !== "all" && !category) notFound();
+  return { slug, name: category?.name };
+}
+
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const category = categorySelection(params, await getCategories());
+  const searching = Boolean(params?.search?.trim());
+  const title = searching ? "Search SaaS Deals" : category.name ? `${category.name} Deals` : "SaaS Deals";
+  const description = searching
+    ? "Search the SaaSpin deal listings by product name, description or category. Confirm current offer terms with the provider."
+    : category.name
+      ? `Browse ${category.name} deal listings on SaaSpin. Explore product information, listed pricing and offer schedules.`
+      : "Browse SaaS deal listings and filter software offers by category.";
+  const metadata = pageMetadata({ title, description,
+    path: category.slug === "all" ? "/deals" : `/deals?category=${encodeURIComponent(category.slug)}`,
+  });
+  // Category filters are not editorial landing pages. Revisit once useful guides exist.
+  if (category.slug !== "all" || searching) metadata.robots = { index: false, follow: true };
+  return metadata;
+}
 
 export default async function DealsPage({ searchParams }) {
   const [deals, categories] = await Promise.all([getDeals(), getCategories()]);
@@ -51,10 +75,9 @@ export default async function DealsPage({ searchParams }) {
   const params = await searchParams;
 
   const sort = params?.sort || "latest";
-  const selectedCategory = canonicalSlug(params?.category) || "all";
-  const selectedCategoryName = categories.find(
-    (category) => category.slug === selectedCategory,
-  )?.name || selectedCategory;
+  const selection = categorySelection(params, categories);
+  const selectedCategory = selection.slug;
+  const selectedCategoryName = selection.name || "All SaaS";
 
   const search = params?.search?.toLowerCase() || "";
 
@@ -123,14 +146,13 @@ export default async function DealsPage({ searchParams }) {
             <span className="deals-hero-badge">CURATED SAAS DEALS</span>
 
             <h1>
-              Discover software deals
-              <br />
-              <span>worth paying for.</span>
+              {search ? "Search SaaS Deals" : selectedCategory !== "all" ? `${selectedCategoryName} Deals` : "SaaS Deals"}
             </h1>
 
             <p>
-              Explore hand-picked SaaS discounts, special offers and useful
-              software for growing your business.
+              {selectedCategory !== "all"
+                ? `Explore ${selectedCategoryName} listings and confirm current pricing and offer terms with the provider.`
+                : "Explore software offers by category and confirm current pricing and terms with the provider."}
             </p>
 
             {/* SEARCH */}
@@ -147,6 +169,7 @@ export default async function DealsPage({ searchParams }) {
               <input
                 type="search"
                 name="search"
+                aria-label="Search SaaS deals"
                 defaultValue={params?.search || ""}
                 placeholder="Search SaaS deals, tools or categories..."
               />

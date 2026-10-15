@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { getSiteUrl } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "SaaSpin | SaaS Deals, Reviews & Comparisons",
     template: "%s | SaaSpin",

@@ -1,33 +1,13 @@
 import "@/app/public-pages.css";
 import "@/app/blog-layout.css";
 import { pageMetadata } from "@/lib/seo";
-import { API_URL } from "@/lib/api";
+import { fetchPublicList } from "@/lib/public-api";
 import Navbar from "../../components/Navbar";
 import BlogCard from "../../components/BlogCard";
 import Footer from "../../components/Footer";
 
 async function getBlogs() {
-  try {
-    const response = await fetch(
-      `${API_URL}/blogs`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      return [];
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error(
-      "Could not load blogs:",
-      error
-    );
-
-    return [];
-  }
+  return fetchPublicList("/blogs");
 }
 
 export const metadata = pageMetadata({

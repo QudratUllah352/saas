@@ -3,29 +3,10 @@
 // Development: http://localhost:3000
 // Production: https://your-real-domain.com
 
+import { resolveSiteUrl } from "./site-url.mjs";
+
 export function getSiteUrl() {
-  const value = process.env.SITE_URL?.trim();
-
-  if (!value) {
-    return null;
-  }
-
-  const url = new URL(value);
-
-  if (
-    !["http:", "https:"].includes(url.protocol) ||
-    url.username ||
-    url.password ||
-    url.pathname !== "/" ||
-    url.search ||
-    url.hash
-  ) {
-    throw new Error(
-      "SITE_URL must be an HTTP(S) website origin without credentials, a path, query, or fragment."
-    );
-  }
-
-  return url.origin;
+  return resolveSiteUrl();
 }
 
 export function pageMetadata({

@@ -1,0 +1,22 @@
+# Offer correction review — no changes applied
+
+Checked 15 October 2026 (Asia/Karachi). Evidence: read-only local public APIs plus the official pages linked below. These are proposed corrections for editorial review; no prices, discounts, publication flags, article copy, or database records were changed. No private affiliate destinations were opened or recorded.
+
+## Current records and evidence
+
+Percentages below are arithmetic only: `(oldPrice - price) / oldPrice * 100`. The UI displays `$`, but the Deal model has no explicit currency field. Stored numbers therefore do not establish USD or any other dollar currency. All four records currently have null start/end dates; that does not prove an unlimited-duration vendor offer.
+
+| Product / deal ID | Current stored display | Arithmetic | Official evidence | Proposed action, pending verification |
+| --- | --- | --- | --- | --- |
+| Apify / `6ac8d8f092389e20ed8fbc59` | 13 versus 19; 30% OFF; monthly | 31.58%; exact 30% off 19 would be 13.30 | [Official pricing](https://apify.com/pricing) lists Starter at $19/month plus usage and shows a separate annual billing discount of 10%. It does not substantiate this record's 13/month promotional price or 30% promotion. | Obtain the specific approved promotion, plan, currency, eligibility, duration, renewal and usage terms. Reconcile the three numeric claims together; do not automatically replace the label with 32%. |
+| Advertmate / `6ac8ac2e43c8b32c3f665c7d` | 77 versus 97; 20% OFF; billing type `other` | 20.62%; exact 20% off 97 would be 77.60 | [Official sales page](https://www.advertmate.com/) shows 77 reduced to 67 using coupon `vip10`, with launch/one-time wording. The inspected text does not establish 97 as the reference price for the listed plan. The page also contains recurring-payment caveats, so checkout terms matter. | Confirm the actual offer and checkout package, coupon validity, billing basis and renewal terms. Consider 67/77 only after verification; do not infer a new 97-based discount from unrelated bonus values. |
+| AI Top Tools / `6ac8ab8043c8b32c3f665c7b` | 222 versus 478; 20% OFF; monthly | 53.56%; exact 20% off 478 would be 382.40 | [Official homepage](https://aitoptools.com/) describes a directory and promotes listing/advertising services. The [submission page](https://aitoptools.com/claim-your-tool/) inspected does not substantiate a 222/month subscription discounted from 478. Its editable price field describes the tool being submitted, not necessarily an AITopTools subscription. | Highest-priority evidence gap. Establish what is being sold, to whom, and whether this is a directory listing, ad package, another product, or a mistaken record. Do not turn this into a 54% offer based on arithmetic alone. If unverifiable, propose unpublishing separately for approval. |
+| Comp AI / `6ac8aadc43c8b32c3f665c79` | 4500 versus 5000; 10% OFF; annual | Exactly 10%; internally consistent | [Official pricing](https://www.trycomp.ai/pricing) quotes individually according to frameworks, company size, timeline, and scope. It does not substantiate a universal 4500/year promotional offer versus 5000/year. | Request written vendor/partner confirmation of plan scope, eligibility, currency, annual term, included audit/services, and promotion duration. Arithmetic consistency alone is insufficient. |
+
+Public official pages may omit private partner promotions. Absence from these pages does not prove an offer is false. No checkout was submitted and no vendor was contacted. The correction list should be revisited with authorized vendor/affiliate-program evidence before editing records.
+
+## Evidence required before approving a change
+
+For each offer record: exact plan/package, vendor confirmation or approved public promotion URL, currency, current/reference prices for the same billing period, computed discount and rounding policy, coupon, eligibility, start/end or explicitly unknown expiry, renewal price, usage limits/additional fees, and verification date. Keep private partner evidence outside public APIs and repository documentation.
+
+After approval, synchronize the listing, detail page, linked reviews/comparisons/blogs and any future structured data. Current review prose embeds offer prices/discounts, so correcting the Deal alone will not correct all visible claims. No migration script or automatic data mutation is included in this batch.

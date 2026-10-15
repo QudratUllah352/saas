@@ -1,28 +1,12 @@
 import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
-import { API_URL } from "@/lib/api";
+import { fetchPublicList } from "@/lib/public-api";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ReviewCard from "../../components/ReviewCard";
 
 async function getReviews() {
-  try {
-    const response = await fetch(
-      `${API_URL}/reviews`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch reviews");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Reviews fetch error:", error);
-    return [];
-  }
+  return fetchPublicList("/reviews");
 }
 
 export const metadata = pageMetadata({

@@ -9,7 +9,7 @@ const {
 } = require("../utils/emailService");
 
 function getFrontendUrl() {
-  return process.env.FRONTEND_URL || "http://localhost:3000";
+  return require("../config/environment").frontendOrigin();
 }
 
 // Simple in-memory rate limiting map for forgot-password
@@ -39,7 +39,7 @@ const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
+    if (typeof email !== "string" || typeof password !== "string" || !email.trim() || !password) {
       return res.status(400).json({
         message: "Email and password are required.",
       });
@@ -78,8 +78,8 @@ const loginAdmin = async (req, res) => {
       });
     }
 
-    // Backward-compatible role assignment: if existing admin lacks a role, default to superadmin
-    const effectiveRole = admin.role || "superadmin";
+    // Legacy accounts must not gain elevated permissions implicitly.
+    const effectiveRole = admin.role || "admin";
 
     // If document didn't have role stored yet, persist it
     if (!admin.role) {
@@ -203,7 +203,7 @@ const requestPasswordReset = async (req, res) => {
     });
 
     // In dev mode (when SMTP credentials are missing), return resetUrl in response for easy local testing
-    if (emailResult.mode === "dev") {
+    if (process.env.NODE_ENV !== "production" && emailResult.mode === "dev") {
       return res.status(200).json({
         ...genericResponse,
         devResetUrl: resetUrl,

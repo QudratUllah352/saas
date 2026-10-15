@@ -1,28 +1,12 @@
 import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
-import { API_URL } from "@/lib/api";
+import { fetchPublicList } from "@/lib/public-api";
 import Navbar from "../../components/Navbar";
 import ComparisonCard from "../../components/ComparisonCard";
 import Footer from "../../components/Footer";
 
 async function getComparisons() {
-  try {
-    const response = await fetch(
-      `${API_URL}/comparisons`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch comparisons");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Comparisons fetch error:", error);
-    return [];
-  }
+  return fetchPublicList("/comparisons");
 }
 
 export const metadata = pageMetadata({

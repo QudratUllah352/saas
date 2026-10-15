@@ -1,6 +1,6 @@
 import "@/app/public-pages.css";
 import "./review-detail.css";
-import { pageMetadata, unavailableMetadata } from "@/lib/seo";
+import { getSiteUrl, pageMetadata } from "@/lib/seo";
 import { API_URL } from "@/lib/api";
 import Navbar from "../../../components/Navbar";
 import Link from "next/link";
@@ -9,6 +9,8 @@ import OfferTiming, { DealOfferButton } from "@/components/OfferTiming";
 import { getOfferTime } from "@/lib/dealDates";
 import Footer from "../../../components/Footer";
 import ReviewShare from "../../../components/ReviewShare";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { canonicalSlug } from "@/lib/categories";
 
 function hasRating(value) {
   return typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 5;
@@ -17,22 +19,24 @@ function hasRating(value) {
 async function getReview(slug) {
   const response = await fetch(`${API_URL}/reviews/${slug}`, {
     cache: "no-store",
+      signal: AbortSignal.timeout(10000),
   });
 
-  if (response.status === 404) {
-    return null;
-  }
+  if (response.status === 404) notFound();
 
   if (!response.ok) {
     throw new Error("Failed to fetch review");
   }
 
-  return response.json();
+  const review = await response.json();
+  if (!review?.product) notFound();
+  return review;
 }
 async function getRelatedReviews(currentReview) {
   try {
     const response = await fetch(`${API_URL}/reviews`, {
       cache: "no-store",
+      signal: AbortSignal.timeout(10000),
     });
 
     if (!response.ok) return [];
@@ -68,6 +72,7 @@ async function getRelatedBlogs(productId) {
   try {
     const response = await fetch(`${API_URL}/blogs`, {
       cache: "no-store",
+      signal: AbortSignal.timeout(10000),
     });
 
     if (!response.ok) return [];
@@ -94,6 +99,7 @@ async function getRelatedComparisons(productId) {
       `${API_URL}/comparisons`,
       {
         cache: "no-store",
+      signal: AbortSignal.timeout(10000),
       }
     );
 
@@ -123,10 +129,6 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
 
   const review = await getReview(slug);
-
-  if (!review) {
-    return unavailableMetadata("Review not found");
-  }
 
   const productName = review.product?.name || "Software";
 
@@ -173,6 +175,7 @@ export default async function ReviewDetailPage({ params }) {
 
       <main className="review-detail-page public-page">
         <div className="review-detail-container">
+        <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Reviews", path: "/reviews" }, { name: review.title || `${product.name} Review`, path: `/reviews/${encodeURIComponent(review.slug)}` }]} />
         {/* HERO */}
 
         <section className="review-detail-hero">
@@ -191,7 +194,7 @@ export default async function ReviewDetailPage({ params }) {
                     {product.logo ? <img src={product.logo} alt={`${product.name} logo`} /> : product.name?.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    {product.category?.name && <span className="review-category-label">{product.category.name}</span>}
+                    {product.category?.name && <span className="review-category-label">{product.category.slug ? <Link href={`/deals?category=${encodeURIComponent(canonicalSlug(product.category.slug))}`}>{product.category.name}</Link> : product.category.name}</span>}
                     <span className="review-product-name">{product.name}</span>
                   </div>
                 </div>}
@@ -259,6 +262,7 @@ export default async function ReviewDetailPage({ params }) {
                 <span className="review-section-label">LISTED OFFER</span>
                 <strong>{deal.discount}</strong>
                 <OfferTiming deal={deal} initialNow={offerNow} />
+                {deal.isActive === true && <Link href={`/deals/${encodeURIComponent(deal._id)}`}>View {product.name} deal details</Link>}
               </div>}
               <div className="review-affiliate-section">
                 <div className="review-affiliate-content">
@@ -322,6 +326,7 @@ export default async function ReviewDetailPage({ params }) {
           </section>}
           {/* RATING BREAKDOWN */}
           <ReviewShare
+            siteUrl={getSiteUrl()}
             title={review.title}
             slug={review.slug}
           />
@@ -557,7 +562,7 @@ export default async function ReviewDetailPage({ params }) {
                   <article key={alternative._id} className="alternative-card">
                     <div className="alternative-logo">
                       {alternative.logo ? (
-                        <img src={alternative.logo} alt={alternative.name} />
+                        <img src={alternative.logo} alt={`${alternative.name || "Alternative software"} logo`} />
                       ) : (
                         alternative.name?.charAt(0)?.toUpperCase()
                       )}
@@ -568,6 +573,7 @@ export default async function ReviewDetailPage({ params }) {
                     <p>{alternative.description}</p>
 
                     <span>{alternative.category?.name}</span>
+                    {alternative.name && <Link href={`/deals?search=${encodeURIComponent(alternative.name)}`}>Find {alternative.name} deals</Link>}
                   </article>
                 ))}
               </div>

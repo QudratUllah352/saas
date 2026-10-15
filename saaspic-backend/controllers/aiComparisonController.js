@@ -8,9 +8,9 @@ const Deal = require("../models/Deal");
 // GEMINI
 // ==========================================
 
-const ai = new GoogleGenAI({
+const ai = process.env.GEMINI_API_KEY ? new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
-});
+}) : null;
 
 // Try another model if one is temporarily unavailable
 const GEMINI_MODELS = [
@@ -187,6 +187,7 @@ function validateGeneratedComparison(
 
 const generateComparison =
     async (req, res) => {
+  if (!ai) return res.status(503).json({ message: "AI generation is unavailable. Configure GEMINI_API_KEY on the backend." });
         try {
             const {
                 productAId,

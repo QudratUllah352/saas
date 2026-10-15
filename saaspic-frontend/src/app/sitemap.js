@@ -1,41 +1,14 @@
-import { API_URL } from "@/lib/api";
+import { fetchPublicList } from "@/lib/public-api";
 import { getSiteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 async function getContent(endpoint) {
-  try {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      console.error(
-        `Sitemap fetch failed for ${endpoint}:`,
-        response.status
-      );
-
-      return [];
-    }
-
-    const data = await response.json();
-
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    console.error(
-      `Sitemap fetch error for ${endpoint}:`,
-      error
-    );
-
-    return [];
-  }
+  return fetchPublicList(endpoint);
 }
 
 export default async function sitemap() {
-  const siteUrl =
-    getSiteUrl() ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   const baseUrl = siteUrl.replace(/\/$/, "");
 

@@ -5,15 +5,12 @@ import { useState } from "react";
 export default function ReviewShare({
     title,
     slug,
+    siteUrl,
 }) {
     const [copied, setCopied] = useState(false);
 
-    const siteUrl =
-        process.env.NEXT_PUBLIC_SITE_URL ||
-        "http://localhost:3000";
-
     const reviewUrl =
-        `${siteUrl}/reviews/${slug}`;
+        `${siteUrl}/reviews/${encodeURIComponent(slug)}`;
 
     const encodedUrl =
         encodeURIComponent(reviewUrl);
