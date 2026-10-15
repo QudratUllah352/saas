@@ -100,7 +100,14 @@ app.use(async (req, res, next) => {
     next();
   } catch (error) {
     databaseReady = undefined;
-    console.error("Database initialization failed:", error.name || "Error");
+    console.error("Database initialization failed:", {
+      name: error.name,
+      code: error.code,
+      message: error.message?.replace(
+        /mongodb(?:\+srv)?:\/\/[^\s]+/gi,
+        "[REDACTED DATABASE URI]"
+      ),
+    });
 
     res.status(503).json({
       message: "Service temporarily unavailable",
