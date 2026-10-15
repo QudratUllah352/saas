@@ -82,7 +82,31 @@ app.get("/api/health", (req, res) => {
     message: ready ? "SaaSpin API is ready" : "Database unavailable",
   });
 });
+// Initialize once per Vercel instance; share the promise across requests.
+let databaseReady;
 
+app.use(async (req, res, next) => {
+  if (!process.env.VERCEL) return next();
+
+  try {
+    if (!databaseReady) {
+      databaseReady = Promise.resolve().then(() => {
+        validateEnvironment();
+        return connectDB();
+      });
+    }
+
+    await databaseReady;
+    next();
+  } catch (error) {
+    databaseReady = undefined;
+    console.error("Database initialization failed:", error.name || "Error");
+
+    res.status(503).json({
+      message: "Service temporarily unavailable",
+    });
+  }
+});
 // ============================================
 // API ROUTES
 // ============================================
@@ -207,8 +231,17 @@ async function start() {
   return server;
 }
 
-if (require.main === module) start().catch(() => {
-  console.error("API startup failed. Check backend environment configuration and MongoDB connectivity.");
-  process.exitCode = 1;
-});
-module.exports = { app, start };
+if (require.main === module && !process.env.VERCEL) {
+  start().catch(() => {
+    console.error(
+      "API startup failed. Check backend environment configuration and MongoDB connectivity."
+    );
+    process.exitCode = 1;
+  });
+}
+
+module.exports = app;
+
+// Preserve compatibility with scripts importing { app, start }.
+module.exports.app = app;
+module.exports.start = start;
