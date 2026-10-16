@@ -24,6 +24,12 @@ export default function AffiliateButton({
         return null;
     }
 
+    const disclosureText = product.affiliate?.disclosureText ||
+        "This is an affiliate link. SaaSpin may earn a commission if you purchase through this link, at no additional cost to you.";
+    const isRemovedPageDisclosure = /^(?:[ⓘℹ]\s*)?this page may contain affiliate links\s*\.\s*saas(?:pic|pin) may earn a commission from qualifying purchases\s*,?\s*at no (?:extra|additional) cost to you\s*\.?$/i.test(
+        disclosureText.trim().replace(/\s+/g, " ")
+    );
+
     return (
         <div className="affiliate-cta-wrapper">
             <a
@@ -39,12 +45,11 @@ export default function AffiliateButton({
                 </span>
             </a>
 
-            {affiliateEnabled && (
+            {affiliateEnabled && !isRemovedPageDisclosure && (
                 <p className="affiliate-cta-disclosure">
                     <span>ⓘ</span>
 
-                    {product.affiliate?.disclosureText ||
-                        "This is an affiliate link. SaaSpin may earn a commission if you purchase through this link, at no additional cost to you."}
+                    {disclosureText}
                 </p>
             )}
         </div>
