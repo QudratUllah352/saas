@@ -30,6 +30,8 @@ export default function AffiliateButton({
         disclosureText.trim().replace(/\s+/g, " ")
     );
 
+    const isGetDeal = /^Get\b.*\bDeal(?:\s*[→↗])?\s*$/i.test(label);
+
     return (
         <div className="affiliate-cta-wrapper">
             <a
@@ -38,11 +40,11 @@ export default function AffiliateButton({
                 rel="noopener noreferrer sponsored"
                 className={`affiliate-cta-button ${className}`}
             >
-                <span>{label}</span>
+                <span>{isGetDeal ? "Get Deal" : label}</span>
 
-                <span className="affiliate-cta-arrow">
+                {!isGetDeal && <span className="affiliate-cta-arrow">
                     →
-                </span>
+                </span>}
             </a>
 
             {affiliateEnabled && !isRemovedPageDisclosure && (
