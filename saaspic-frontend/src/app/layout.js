@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./public-actions.css";
 import { getSiteUrl } from "@/lib/seo";
 
 const geistSans = Geist({

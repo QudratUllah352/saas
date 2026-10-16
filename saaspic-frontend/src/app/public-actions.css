@@ -1,0 +1,459 @@
+/* Public actions only: existing routes, semantics and event handlers stay in JSX. */
+html:root body :is(main.public-page, main.public-home) {
+  --action-teal: #0e7490;
+  --action-teal-hover: #155e75;
+  --action-soft: #e6f7fa;
+  --action-border: #b6dfe7;
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  height: auto;
+  padding: 10px 18px;
+  border: 1px solid var(--action-teal);
+  border-radius: 10px;
+  background: var(--action-fill, var(--action-teal));
+  color: var(--action-text, #fff);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+  transform: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .deal-expert-button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+) {
+  --action-fill: #fff;
+  --action-text: var(--action-teal);
+  --action-hover-fill: var(--action-soft);
+  --action-hover-text: var(--action-teal-hover);
+  border-color: var(--action-border);
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+) { border-radius: 999px; padding-inline: 14px; }
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+):hover {
+  background: var(--action-hover-fill, var(--action-teal-hover));
+  color: var(--action-hover-text, #fff);
+  border-color: var(--action-teal);
+  box-shadow: 0 2px 8px rgb(14 116 144 / 12%);
+  transform: none;
+  text-decoration: none;
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+):is(.active, [aria-pressed="true"]) {
+  --action-fill: var(--action-teal);
+  --action-text: #fff;
+  --action-hover-fill: var(--action-teal-hover);
+  --action-hover-text: #fff;
+  background: var(--action-teal);
+  color: #fff;
+  border-color: var(--action-teal);
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .premium-deal-category,
+  .premium-review-category,
+  .premium-blog-category,
+  .deal-category,
+  .review-category-label,
+  .comparison-product-category,
+  .blog-detail-category,
+  .related-deal-category,
+  .review-related-category,
+  .home-discovery-chip,
+  .home-search-suggestions > button
+) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 28px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--action-soft);
+  color: var(--action-teal);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+  transform: none;
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .deal-category,
+  .review-category-label
+):has(> a) { padding: 0; }
+html:root body :is(main.public-page, main.public-home) :is(
+  .deal-category > a,
+  .review-category-label > a
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 4px 10px;
+  border-radius: inherit;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+html:root body :is(main.public-page, main.public-home) :is(
+  a.home-discovery-chip,
+  .home-search-suggestions > button,
+  .deal-category > a,
+  .review-category-label > a
+) { transition: background-color 160ms ease, color 160ms ease; }
+html:root body :is(main.public-page, main.public-home) :is(
+  a.home-discovery-chip,
+  .home-search-suggestions > button,
+  .deal-category > a,
+  .review-category-label > a
+):hover { background: #ccecf2; color: #155e75; transform: none; text-decoration: none; }
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button,
+  .premium-deal-category,
+  .premium-review-category,
+  .premium-blog-category,
+  .deal-category,
+  .review-category-label,
+  .comparison-product-category,
+  .blog-detail-category,
+  .related-deal-category,
+  .review-related-category,
+  .home-discovery-chip,
+  .home-search-suggestions > button,
+  .deal-category > a,
+  .review-category-label > a
+):focus-visible { outline: 3px solid var(--action-teal); outline-offset: 3px; }
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+):disabled { opacity: 0.65; cursor: not-allowed; box-shadow: none; }
+
+html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+) > span { min-width: 0; color: inherit; transform: none; }
+html:root body :is(main.public-page, main.public-home) .affiliate-cta-arrow { flex-shrink: 0; }
+
+html:root body :is(main.public-page, main.public-home) .global-search-open { display: inline-flex; gap: 6px; min-height: 32px; align-items: center; padding: 4px 10px; border: 1px solid var(--action-border); border-radius: 8px; background: #fff; color: var(--action-teal); font-size: 13px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  html:root body :is(main.public-page, main.public-home) :is(
+  .affiliate-cta-button,
+  .premium-deal-button,
+  .premium-review-button,
+  .premium-comparison-button,
+  .submit-form-button
+) { width: 100%; }
+  html:root body :is(main.public-page, main.public-home) :is(
+  a.home-discovery-chip,
+  .home-search-suggestions > button,
+  .deal-category > a,
+  .review-category-label > a
+) { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button,
+  .premium-deal-category,
+  .premium-review-category,
+  .premium-blog-category,
+  .deal-category,
+  .review-category-label,
+  .comparison-product-category,
+  .blog-detail-category,
+  .related-deal-category,
+  .review-related-category,
+  .home-discovery-chip,
+  .home-search-suggestions > button,
+  .deal-category > a,
+  .review-category-label > a
+),
+  html:root body :is(main.public-page, main.public-home) :is(
+  .saaspin-hero-primary,
+  .premium-deal-button,
+  .affiliate-cta-button,
+  .review-deal-button,
+  .comparison-product-link,
+  .deal-expert-button,
+  .related-deal-link,
+  .review-summary-offer > a,
+  .premium-submit-primary,
+  .submit-form-button,
+  .submit-again-button,
+  .deals-hero-search button,
+  .global-search-form button,
+  .home-search-form button,
+  .premium-newsletter-form button,
+  .saaspin-hero-secondary,
+  .premium-review-button,
+  .premium-comparison-button,
+  .premium-blog-read,
+  .premium-section-link,
+  .premium-submit-secondary,
+  .why-bottom-button,
+  .deal-review-link-button,
+  .review-related-link,
+  .comparison-related-card > a,
+  .blog-related-content-card > a,
+  .comparisons-primary-button,
+  .public-blogs-primary-button,
+  .review-share-buttons > :is(a, button),
+  .comparison-share-buttons > :is(a, button),
+  .blog-share-buttons > :is(a, button),
+  .deals-sort-buttons > a,
+  .deals-category-buttons > button
+) > span { transition: none; animation: none; }
+}

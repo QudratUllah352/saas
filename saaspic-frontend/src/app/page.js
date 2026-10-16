@@ -47,7 +47,7 @@ export default async function Home() {
       <Navbar />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: "SaaSpin", url: getSiteUrl() }} />
 
-      <main>
+      <main className="public-home">
         <Hero
           featuredReview={latestReviews[0]}
           totalReviews={reviews.length}
