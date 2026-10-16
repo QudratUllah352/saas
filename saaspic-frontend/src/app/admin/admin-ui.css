@@ -69,6 +69,23 @@
 .admin-shell .admin-ai-assistant-body { padding: 20px !important; gap: 16px; flex-wrap: wrap; }
 .admin-shell .admin-ai-badge { color: #0e7490 !important; background: none !important; }
 .admin-shell .admin-ai-sparkle { display: none; }
+/* Blog Writer spacing only; other AI assistant cards retain their layout. */
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card { padding: 24px !important; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .admin-ai-assistant-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 0 !important;
+}
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .admin-ai-assistant-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .admin-ai-assistant-desc { margin: 0 0 24px; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .blog-form-group { display: flex; flex-direction: column; gap: 8px; margin: 0 0 16px; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .blog-form-group :is(label, textarea) { margin: 0; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card :is(textarea, .admin-ai-action-btn) { width: 100%; min-width: 0; max-width: 100%; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .admin-ai-action-btn { margin: 0; white-space: normal; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .admin-ai-notice { display: flex; align-items: flex-start; gap: 8px; margin: 12px 0 0; line-height: 1.6; }
+.admin-shell .blog-editor-sidebar > .admin-ai-assistant-card .admin-ai-notice > span:first-child { flex-shrink: 0; }
 .admin-shell :is(.admin-ai-assistant-card, .admin-ai-action-btn)::before, .admin-shell :is(.admin-ai-assistant-card, .admin-ai-action-btn)::after { display: none; }
 .admin-shell :is(.admin-error, .admin-error-message, .admin-products-error, .form-error) { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px; }
 .admin-shell :is(.admin-success, .admin-success-message, .admin-ai-message, .admin-message) { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px; }
@@ -109,6 +126,7 @@
   .admin-shell :is(.blog-editor-layout, .affiliate-admin-layout) { grid-template-columns: minmax(0, 1fr) !important; }
 }
 @media (max-width: 767px) {
+  .admin-shell .blog-editor-sidebar > .admin-ai-assistant-card { padding: 16px !important; }
   .admin-shell .admin-shell-main { padding: 20px 16px; }
   .admin-shell .admin-topbar { padding-inline: 16px; }
   .admin-shell .admin-topbar-link span { display: none; }
