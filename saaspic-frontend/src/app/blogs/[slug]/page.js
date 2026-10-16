@@ -321,12 +321,10 @@ export default async function BlogDetailPage({ params }) {
             {/* INTRODUCTION */}
 
             {blog.introduction && <section
-              className="blog-article-introduction"
+              className="blog-article-introduction blog-article-section"
               id="introduction"
             >
-              <span className="blog-article-section-label">
-                INTRODUCTION
-              </span>
+              <h2>Introduction</h2>
               <p>
                 {blog.introduction}
               </p>
@@ -365,9 +363,7 @@ export default async function BlogDetailPage({ params }) {
               className="blog-article-conclusion"
               id="final-thoughts"
             >
-              <span className="blog-article-section-label">
-                FINAL THOUGHTS
-              </span>
+              <h2>Final Thoughts</h2>
               <h2>
                 Key Takeaways
               </h2>
