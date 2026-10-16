@@ -182,13 +182,6 @@ export default async function ReviewDetailPage({ params }) {
 
             <div className="review-detail-heading">
               <div>
-                <div className="review-back-link">
-
-                  <Link href="/reviews">
-                    ← Back to all reviews
-                  </Link>
-
-                </div>
                 {product && <div className="review-hero-brand">
                   <div className="review-product-logo">
                     {product.logo ? <img src={product.logo} alt={`${product.name} logo`} /> : product.name?.charAt(0).toUpperCase()}

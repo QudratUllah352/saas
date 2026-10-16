@@ -1,5 +1,6 @@
 "use client";
 
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 
 
@@ -138,6 +139,7 @@ export default function SubmitDealPage() {
       <Navbar />
 
       <main className="submit-page public-page">
+        <Breadcrumbs standalone structuredData={false} items={[{ name: "Home", path: "/" }, { name: "Submit Deal", path: "/submit-deal" }]} />
 
         {/* HERO */}
 

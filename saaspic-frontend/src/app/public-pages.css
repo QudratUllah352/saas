@@ -179,18 +179,6 @@
 .public-page .blog-detail-layout { grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); gap: 32px; }
 .public-page .blog-article :is(img, video, iframe) { max-width: 100%; }
 .public-page .blog-article pre { overflow-x: auto; max-width: 100%; }
-.public-page .public-back-button {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 10px 16px;
-  border: 1px solid var(--public-border);
-  border-radius: 12px;
-  background: #fff;
-  color: var(--public-teal);
-  font-weight: 600;
-  text-decoration: none;
-}
 
 /* Search and submissions share homepage surfaces and input treatments. */
 .public-page .global-search-card { padding: 24px; }
@@ -380,7 +368,6 @@
 .public-page.review-detail-page .review-deal-box { gap: 24px; }
 
 /* Comparisons: equal product columns and local table scrolling. */
-.public-page.comparison-detail-page .comparison-bottom-action { margin-top: 0; margin-bottom: 24px; }
 .public-page.comparison-detail-page .comparison-detail-products { grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr); align-items: stretch; gap: 24px; margin-top: 0; }
 .public-page.comparison-detail-page .comparison-detail-vs { align-self: center; text-align: center; }
 .public-page.comparison-detail-page .comparison-detail-product { display: flex; flex-direction: column; align-items: flex-start; }

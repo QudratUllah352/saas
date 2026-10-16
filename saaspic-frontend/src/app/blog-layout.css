@@ -92,8 +92,6 @@
 .public-page.blog-detail-page .blog-related-content-card h3 { font-size: 19px; }
 .public-page.blog-detail-page .blog-related-content-card p { font-size: 15px; }
 .public-page.blog-detail-page .blog-related-content-card a { min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; }
-.public-page.blog-detail-page .blog-detail-bottom-back { padding: 32px 0 0; }
-.public-page.blog-detail-page .blog-detail-bottom-back a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
 .public-page.blog-error-page { width: calc(100% - var(--blog-gutter) * 2); max-width: 800px; padding: var(--blog-space) var(--blog-panel); margin: var(--blog-space) auto; border: 1px solid #e0f2f5; border-radius: 16px; background: #fff; }
 .public-page.blog-error-page h1 { font-size: clamp(28px, 3.5vw, 40px); }
 .public-page.blog-error-page a { display: inline-flex; align-items: center; min-height: 44px; color: #0e7490; }

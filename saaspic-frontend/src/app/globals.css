@@ -18636,18 +18636,7 @@ textarea {
   margin: 0 auto;
 }
 
-.back-link {
-  display: inline-flex;
-  margin-bottom: 28px;
-  color: #6b7280;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-}
 
-.back-link:hover {
-  color: #0E7490;
-}
 
 .deal-detail-card {
   padding: 42px;
@@ -19945,27 +19934,9 @@ textarea {
 }
 
 
-/* =========================================
-   BACK TO REVIEWS
-========================================= */
 
-.review-back-link {
-  margin-top: 30px;
-}
 
-.review-back-link a {
-  display: inline-flex;
 
-  color: #0E7490;
-  font-size: 14px;
-  font-weight: 700;
-
-  text-decoration: none;
-}
-
-.review-back-link a:hover {
-  text-decoration: underline;
-}
 
 
 /* =========================================
@@ -21706,18 +21677,8 @@ textarea {
   text-decoration: none;
 }
 
-/* BOTTOM BACK */
 
-.blog-detail-bottom-back {
-  padding: 32px 0 60px;
-}
 
-.blog-detail-bottom-back a {
-  color: #0E7490;
-  font-size: 13px;
-  font-weight: 750;
-  text-decoration: none;
-}
 
 @media (max-width: 850px) {
   .blog-related-content-grid {

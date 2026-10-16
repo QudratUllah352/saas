@@ -1,3 +1,56 @@
-.breadcrumbs { margin: 0 0 16px; font-size: 14px; overflow-wrap: anywhere; }
-.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.breadcrumbs a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+nav.breadcrumbs {
+  margin: 0 0 16px;
+  padding: 0;
+  min-width: 0;
+  color: var(--color-muted, #64748b);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: left;
+}
+
+nav.standalone {
+  width: calc(100% - 40px);
+  max-width: 1180px;
+  margin: 20px auto 0;
+}
+
+nav.blog {
+  width: calc(100% - clamp(16px, 3vw, 32px) * 2);
+  max-width: 1200px;
+}
+
+/* Keep the breadcrumb close to the existing listing hero. */
+.standalone ~ :global(section):first-of-type { padding-top: 24px; }
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs ol > li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li::marker { content: ""; }
+.breadcrumbs .separator { flex: 0 0 auto; color: var(--color-primary-dark, #0e7490); }
+.breadcrumbs .current { min-width: 0; color: var(--color-text, #334155); overflow-wrap: anywhere; }
+.breadcrumbs a { color: var(--color-primary-dark, #0e7490); text-decoration: none; overflow-wrap: anywhere; }
+.breadcrumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.breadcrumbs a:focus-visible { outline: 2px solid var(--color-primary-dark, #0e7490); outline-offset: 3px; border-radius: 2px; }
+
+@media (max-width: 480px) {
+  nav.breadcrumbs { font-size: 12px; }
+}

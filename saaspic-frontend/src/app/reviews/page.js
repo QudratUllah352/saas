@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
 import { fetchPublicList } from "@/lib/public-api";
@@ -23,6 +24,7 @@ export default async function ReviewsPage() {
       <Navbar />
 
       <main className="reviews-page public-page">
+        <Breadcrumbs standalone items={[{ name: "Home", path: "/" }, { name: "Reviews", path: "/reviews" }]} />
         <section className="reviews-hero">
           <div className="reviews-container">
             <p className="reviews-label">

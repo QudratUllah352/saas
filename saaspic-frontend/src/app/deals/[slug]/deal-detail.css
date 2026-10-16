@@ -1,7 +1,6 @@
 /* Only the public deal detail route: keep shared catalog styles intact. */
 .public-page.deal-detail-page { padding: 28px 24px 48px; }
 .public-page.deal-detail-page .deal-detail-container { max-width: 1200px; }
-.public-page.deal-detail-page .back-link { margin: 0 0 20px; color: #0e7490; }
 .public-page.deal-detail-page .deal-detail-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 24px; }
 .public-page.deal-detail-page .deal-detail-main { display: flex; flex-direction: column; gap: 24px; grid-column: 1; grid-row: 1; }
 .public-page.deal-detail-page .deal-summary-card { grid-column: 2; grid-row: 1; }

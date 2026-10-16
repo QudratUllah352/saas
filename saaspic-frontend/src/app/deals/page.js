@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
 import { API_URL } from "@/lib/api";
@@ -134,6 +135,11 @@ export default async function DealsPage({ searchParams }) {
       <Navbar />
 
       <main className="deals-page public-page">
+        <Breadcrumbs standalone items={[
+            { name: "Home", path: "/" },
+            { name: "Deals", path: "/deals" },
+            ...(selection.name ? [{ name: selection.name, path: `/deals?category=${encodeURIComponent(selection.slug)}` }] : []),
+          ]} />
         {/* =====================================
                     HERO
                 ====================================== */}

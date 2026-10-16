@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import "./comparison-detail.css";
 import { getSiteUrl, pageMetadata } from "@/lib/seo";
@@ -200,16 +201,7 @@ export default async function ComparisonPage({
       <main className="comparison-detail-page public-page">
 
         <div className="comparison-detail-container">
-          <div className="comparison-bottom-action">
-
-            <Link
-              href="/comparisons"
-              className="public-back-button"
-            >
-              ← Back to all comparisons
-            </Link>
-
-          </div>
+          <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Comparisons", path: "/comparisons" }, { name: comparison.title || `${productA?.name || "Software A"} vs ${productB?.name || "Software B"}`, path: `/comparisons/${encodeURIComponent(comparison.slug)}` }]} />
 
           {/* HEADER */}
 

@@ -80,8 +80,6 @@
 .public-page.blog-detail-page .blog-related-content-card p { font-size: 14px; line-height: 1.7; }
 .public-page.blog-detail-page .blog-related-content-card a { min-height: 40px; font-size: 13px; }
 .public-page.blog-detail-page .blog-related-content-card:hover { transform: none; border-color: #67c6d8; box-shadow: 0 4px 16px rgb(14 116 144 / 7%); }
-.public-page.blog-detail-page .blog-detail-bottom-back { padding: 24px 0 0; }
-.public-page.blog-detail-page .blog-detail-bottom-back a { font-size: 13px; }
 @media (max-width: 1100px) {
   .public-page.blog-detail-page .blog-detail-layout { max-width: 800px; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'toc' 'article' 'sidebar'; grid-template-rows: auto; }
   .public-page.blog-detail-page .blog-detail-layout:not(:has(.blog-toc-panel)) { grid-template-areas: 'article' 'sidebar'; }

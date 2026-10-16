@@ -1,8 +1,6 @@
 /* Only the public comparison detail route; keep the shared catalog intact. */
 .public-page.comparison-detail-page { padding: 28px 24px 48px; color: #334155; }
 .public-page.comparison-detail-page .comparison-detail-container { width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 24px; }
-.public-page.comparison-detail-page .comparison-bottom-action { margin: 0; }
-.public-page.comparison-detail-page .public-back-button { min-height: 40px; padding: 8px 12px; font-size: 13px; border-radius: 10px; }
 .public-page.comparison-detail-page :is(.comparison-detail-hero, .comparison-detail-product, .comparison-quick-verdict, .comparison-content-section, .comparison-on-page, .comparison-related-content, .comparison-affiliate-section) {
   width: 100%; margin: 0; padding: 24px; background: #fff; border: 1px solid #dcebef; border-radius: 16px; box-shadow: 0 4px 18px rgb(14 116 144 / 4%);
 }

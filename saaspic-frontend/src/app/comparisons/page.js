@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
 import { fetchPublicList } from "@/lib/public-api";
@@ -23,6 +24,7 @@ export default async function ComparisonsPage() {
       <Navbar />
 
       <main className="comparisons-page public-page">
+        <Breadcrumbs standalone items={[{ name: "Home", path: "/" }, { name: "Comparisons", path: "/comparisons" }]} />
         <section className="comparisons-hero">
           <div className="comparisons-hero-content">
 

@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import { getOfferStatus } from "@/lib/dealDates";
 import { API_URL } from "@/lib/api";
@@ -75,6 +76,7 @@ export default async function SearchPage({
       <Navbar />
 
       <main className="global-search-page public-page">
+        <Breadcrumbs standalone items={[{ name: "Home", path: "/" }, { name: "Search", path: "/search" }]} />
 
         {/* SEARCH HEADER */}
 

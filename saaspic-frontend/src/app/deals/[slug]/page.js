@@ -122,10 +122,7 @@ export default async function DealPage({ params }) {
 
         <main className="deal-detail-page public-page">
           <div className="deal-detail-container">
-            <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Deals", path: "/deals" }, { name: `${product.name} Deal`, path: `/deals/${encodeURIComponent(deal._id)}` }]} />
-            <Link href="/deals" className="back-link">
-              ← Back to Deals
-            </Link>
+            <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Deals", path: "/deals" }, ...(product.category?.name && product.category?.slug ? [{ name: product.category.name, path: `/deals?category=${encodeURIComponent(canonicalSlug(product.category.slug))}` }] : []), { name: `${product.name} Deal`, path: `/deals/${encodeURIComponent(deal._id)}` }]} />
             <div className="deal-detail-card">
               <div className="deal-detail-header">
                 <div className="deal-logo">

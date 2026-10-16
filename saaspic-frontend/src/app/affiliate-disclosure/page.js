@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
@@ -17,6 +18,7 @@ export default function AffiliateDisclosurePage() {
     <Navbar />
     <main className="affiliate-disclosure-page public-page">
       <div className="affiliate-disclosure-container">
+        <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Affiliate Disclosure", path: "/affiliate-disclosure" }]} />
         <div className="affiliate-disclosure-header">
           <span>AFFILIATE DISCLOSURE</span>
 

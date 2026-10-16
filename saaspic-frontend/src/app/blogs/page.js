@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import "@/app/blog-layout.css";
 import { pageMetadata } from "@/lib/seo";
@@ -27,6 +28,7 @@ export default async function BlogsPage() {
       <Navbar />
 
       <main className="public-blogs-page public-page">
+        <Breadcrumbs standalone blog items={[{ name: "Home", path: "/" }, { name: "Blog", path: "/blogs" }]} />
 
         <section className="public-blogs-hero">
 

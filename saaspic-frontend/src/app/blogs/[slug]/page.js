@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import "@/app/public-pages.css";
 import "@/app/blog-layout.css";
 import "./blog-detail.css";
@@ -183,14 +184,8 @@ export default async function BlogDetailPage({ params }) {
 
       <main className="blog-detail-page public-page">
         <div className="blog-detail-container">
+          <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Blog", path: "/blogs" }, { name: blog.title, path: `/blogs/${encodeURIComponent(blog.slug)}` }]} />
 
-          <div className="blog-detail-bottom-back">
-
-            <Link href="/blogs">
-              ← Back to all posts
-            </Link>
-
-          </div>
 
         </div>
 
